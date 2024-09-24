@@ -1,0 +1,27 @@
+=> The CHECK constraint in SQL is used to limit the range of values that can be entered into a column. 
+=> It enforces data integrity by ensuring that all values in a column meet a specified condition.
+=> The CHECK constraint can be applied to a single column or multiple columns.
+=> If a value does not satisfy the CHECK condition, SQL prevents the insertion or update operation.
+
+----------------------------------------------------------------------------------------
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    age INT CHECK (age >= 18),
+    salary DECIMAL(10, 2) CHECK (salary > 0)
+);
+
+=> The age column must have values greater than or equal to 18.
+=> The salary column must have values greater than 0.
+-----------------------------------------------------------------------------------------------
+
+INSERT INTO employees (employee_id, first_name, age, salary)
+VALUES (1, 'John', 17, 50000);
+
+=> This statement will fail because the age value (17) does not meet the CHECK condition (age >= 18).
+
+-----------------------------------------------------------------------------------------
+
+The CHECK constraint is useful for enforcing business rules at the database level,
+ ensuring that only valid data is entered into your tables.

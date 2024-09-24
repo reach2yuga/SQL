@@ -1,0 +1,19 @@
+=> DEFAULT constraint is used to set a default value for a column when no value is specified during the insertion of a record.
+=> This ensures that the column has a valid entry even if data isn't provided, thereby maintaining data integrity.
+=> This constraint is useful for setting common or expected values, avoiding NULL values, or ensuring consistent data entries.
+
+-------------------------------------------------
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    salary DECIMAL(10, 2) DEFAULT 50000.00
+);
+
+=> if you insert a new employee record without specifying the salary, the column will automatically be set to 50000.00
+---------------------------------------------------
+
+INSERT INTO employees (employee_id, first_name)
+VALUES (1, 'John');
+
+=> Since no salary is provided, John's salary will default to 50000.00.
