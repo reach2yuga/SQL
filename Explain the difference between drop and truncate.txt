@@ -1,0 +1,23 @@
+DROP:
+•	Purpose: Removes an entire table from the database.
+•	Data Removal: Deletes both the table structure and all associated data, including indexes, constraints, and permissions.
+•	Transaction: Typically performed as a single, atomic operation within a transaction.
+•	Performance Impact: Can be resource-intensive, especially for large tables, as it removes the entire table structure.
+•	Recoverability: Irreversible action; once dropped, the table and its data cannot be recovered without restoring from a backup.
+•	Use Case: Used when you want to completely remove a table and all its contents from the database.
+
+TRUNCATE:
+•	Purpose: Removes all rows from a table while retaining the table structure.
+•	Data Removal: Deletes only the data within the table, leaving the table structure, indexes, and constraints intact.
+•	Transaction: Typically performed within a transaction, ensuring atomicity with other database operations.
+•	Performance Impact: Faster and less resource-intensive than DELETE, especially for large tables, as it deallocates data pages.
+•	Recoverability: Irreversible action; once truncated, the data cannot be recovered, but the table structure remains.
+•	Use Case: Used when you want to quickly remove all data from a table without dropping and recreating the table itself.
+
+DELETE:
+•	Purpose: Removes specific rows from a table based on a condition.
+•	Data Removal: Deletes individual rows matching the specified condition, leaving the table structure, indexes, and constraints intact.
+•	Transaction: Can be part of a transaction, allowing for multiple operations to be committed or rolled back together.
+•	Performance Impact: Slower and more resource-intensive than TRUNCATE, especially for large datasets, as it generates individual row deletions and maintains transaction logs.
+•	Recoverability: Reversible action; deleted rows can be recovered using transaction logs or backups until the transaction is committed.
+•	Use Case: Used when you want to selectively remove specific rows from a table based on criteria, or when you need to maintain transaction logs for recovery purposes.
