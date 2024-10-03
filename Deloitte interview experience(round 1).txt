@@ -1,0 +1,12 @@
+1. Brief introduction about yourself.
+2. Your role and day to day activities in current project.
+3. Difference between Primary key, Foreign Key and Distinct keyword.
+4. What is Normalization and Denormalization.
+5. Steps for Performance optimization of stored procedures.
+6. Shuffle operations
+7. How can we implement for-each in ADF.
+8. Types of triggers in ADF.
+9. Tumbling window.
+10. Which type of cluster is assigned to you in Azure Databricks.
+12. Ways to handle redundant data in spark.
+11. Lambda function in python.

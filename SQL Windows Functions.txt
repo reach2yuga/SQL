@@ -1,0 +1,45 @@
+Row_Number():
+
+- It returns sequentials numbers to the row starting from 1
+  when partition changed it's value reset to 1
+- Order by clause required
+- Partition by clause is optional
+- ROW_NUMBER() over (Order by col1,col2)
+
+select Salary, 
+ROW_NUMBER() over(partition by salary order by salary) as Rownumber
+from Employee
+
+Salary
+3000	1	1	
+5000	1
+5000	2
+12000	1
+25000	1
+25000	2
+35000	1
+60000	1
+60000	2
+90000	1
+90000	2
+90000	3
+90000	4
+----------------------------------------------------------------------
+Rank():
+
+- Return rank starting from 1 when partion changed its value reset to 1
+- oder by clause required
+- Partition by clause is optional
+- When there is tie it skips rank
+
+
+Dense_Rank():
+
+- Return rank starting from 1 when partion changed its value reset to 1
+- oder by clause required
+- Partition by clause is optional
+- When there is tie it will not skip the rank
+
+Usage Case: Both rank(),denserank() function used to find nth highest salary 
+            when there is tie
+			
