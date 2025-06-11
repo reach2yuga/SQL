@@ -1,0 +1,48 @@
+what is difference between CTE and virtual table?
+🔹 What is a CTE?
+A CTE (Common Table Expression) is a temporary result set that you define within the execution scope of a single SELECT, INSERT, UPDATE, or DELETE statement.
+WITH cte_name AS (
+   SELECT ...
+)
+SELECT * FROM cte_name;
+Characteristics:
+Exists only during query execution.
+Used to simplify complex queries.
+Can be recursive.
+Improves readability.
+
+🔹 What is a Virtual Table?
+A virtual table is a more general term and refers to any temporary, non-materialized structure that behaves like a table but doesn’t physically exist in storage.
+
+Examples of virtual tables:
+Views (non-materialized)
+CTEs
+Subqueries in FROM clause
+Inline views
+Characteristics:
+Not stored permanently.
+Can be queried like regular tables.
+Some virtual tables (like views) can be reused, while others (like subqueries) are specific to one query.
+
+🔸 Key Differences
+Feature	CTE	Virtual Table
+Definition	Temporary result defined using WITH	Any temporary result used like a table
+Scope	Single query block	Depends: can be reused (views) or one-time (subqueries)
+Reusability	Not reusable outside the query	Views are reusable, subqueries are not
+Materialization	Not stored physically	Not stored physically
+Recursive	Supports recursion	Not necessarily
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+where data in CTE are stored?
+🔹 Where is data in a CTE stored?
+CTEs (Common Table Expressions) do not store data physically. Instead, they are temporary in-memory result sets that exist only during the execution of the query.
+
+🔸 More technically:
+When you write a CTE using WITH, it acts like a named subquery.
+The SQL engine evaluates the CTE at runtime, and its result is usually held in memory.
+It’s not written to disk or persisted in any table or storage location.
+Once the outer query finishes, the CTE and its data are gone.
+
+
+
