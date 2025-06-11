@@ -44,5 +44,29 @@ The SQL engine evaluates the CTE at runtime, and its result is usually held in m
 It’s not written to disk or persisted in any table or storage location.
 Once the outer query finishes, the CTE and its data are gone.
 
+------------------------------------------------------------------------------------------------------------------------------
+🔹 Table A:
+| id |
+| -- |
+| 1  |
+| 1  |
+
+🔹 Table B:
+| id |
+| -- |
+| 1  |
+| 1  |
+| 1  |
+
+
+| Join Type       | Resulting Row Count |
+| --------------- | ------------------- |
+| INNER JOIN      | 6                   |
+| LEFT JOIN       | 6                   |
+| RIGHT JOIN      | 6                   |
+| FULL OUTER JOIN | 6                   |
+
+
+
 
 
