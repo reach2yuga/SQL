@@ -1,0 +1,79 @@
+id name
+1  Jay
+2  Rashi
+3  Ravi
+4  John
+5  Ravi
+
+
+WITH name_ranks AS (
+  SELECT id, name,
+         ROW_NUMBER() OVER (PARTITION BY name ORDER BY id) AS rn
+  FROM your_table
+)
+SELECT id, name
+FROM name_ranks
+WHERE rn = 1;
+
+
+
+
+
+row_num, rank and dense_rank
+
+100, 1	1	1
+100, 2	1	1
+100, 3	1	1
+200, 4	4	2
+300  5	5	3
+
+
+table1 
+id 
+1
+2
+3
+4
+5
+
+table 2
+id 
+2 
+4
+6
+7
+
+output
+1
+3
+5
+6
+7
+
+SELECT id FROM table1
+WHERE id NOT IN (SELECT id FROM table2)
+
+UNION
+
+SELECT id FROM table2
+WHERE id NOT IN (SELECT id FROM table1)
+ORDER BY id;
+
+
+
+
+input = (1,2,3,4,5)
+ 
+output = (1,3,6,10,15) 
+output []
+total = 0
+
+for i in input:
+	total+ = i
+	
+output.append(total)
+
+
+	
+	
+
