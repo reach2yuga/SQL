@@ -118,7 +118,6 @@ ORDER BY id;
 ---------------------------------------------------------------------------------------------------
 
 6. 
-
 input = (1,2,3,4,5) 
 output = (1,3,6,10,15) 
 
@@ -129,3 +128,21 @@ for i in input:
 	total+ = i
 	
 output.append(total)
+-------------------------------------------------------------------------------------
+7. Reverse string programe:
+input_string = "Yugandhara"
+reverse_string = input_string(::-1)
+print(reverse_string)
+
+input_string = "Yugandhara"
+
+def reverse_string(s):
+reversed_string = ""
+for char in s:
+	reversed_string = char + reversed_string
+	return reversed_string
+print(reversed_string
+
+------------------------------------------------------------------------------------------------------------
+	
+
