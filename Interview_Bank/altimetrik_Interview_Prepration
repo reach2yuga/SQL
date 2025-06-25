@@ -1,1 +1,68 @@
+Skills:
 
+At least 4+ years of application Ab-initio Metadata hub development experience.
+Strong understanding of Data Lineage, metadata management and reference data development and data analytics.
+Good knowledge about relational databases like Oracle, SQL / PLSQL,
+Strong knowledge in one or more of the areas of:
+Data lineage, application development, python or Java coding experience
+Hands on experience of any coding language and tool based configuration prior experience.
+Full Software Development Kit (SDK) development cycle experience.
+Pragmatic problem-solving and ability to work independently or as part of a team.
+Proficiency in ab-initio mHub or python programming languages.
+Proficiency with 1 or more of the following programming languages: Java, API, Python
+2+ years of non-internship professional software development experience
+
+---------------------------------------------------------------------------------------------------------
+1. understanding of Data Lineage?
+📌 What is Data Lineage?
+=> Data lineage is the life cycle of data — it shows where data comes from, how it moves, how it is transformed, and where it ends up.
+=> In simple terms:
+=> Data lineage answers: "Where did this data come from, and how did it get here?"
+=>Suppose you're building a dashboard showing total sales by region.source mysql, transformation i used pyspark,loaded into snowflake
+=>🔍 With data lineage, you can trace any number back to its source and transformation logic.
+
+| Reason                    | Benefit                                        |
+| ------------------------- | ---------------------------------------------- |
+| ✅ **Data Trust**          | Understand where data comes from               |
+| 🐞 **Debugging**          | Fix errors by tracking transformation issues   |
+| 📜 **Audit & Compliance** | Show regulators how sensitive data is used     |
+| 🔁 **Impact Analysis**    | Know what breaks if a column or system changes |
+| ⚙️ **Optimization**       | Identify unnecessary steps or bottlenecks      |
+
+🧠 Tools That Provide Data Lineage : Ab Initio Metadata Hub , Databricks Unity Catalog
+
+-------------------------------------------------------------
+2. 🔧 Types of Lineage
+| Type                    | Description                                            |
+| ----------------------- | ------------------------------------------------------ |
+| **Business lineage**    | High-level: From source system to dashboard            |
+| **Technical lineage**   | Detailed: Includes ETL jobs, SQL logic, schema changes |
+| **Operational lineage** | Shows execution metadata (timestamps, job runs)        |
+
+-----------------------------------------------------------------------------------------------------------------------
+2. Metadata Management & Data Catalog (Data Architecture | Data Governance)
+=> Metadata is data about data.
+=> lets say I have one table 
+| card\_id | customer\_name | due\_amount |
+| -------- | -------------- | ----------- |
+| 123      | John Doe       | \$1000.00   |
+| 456      | Amit Kumar     | \$1500.00   |
+| 789      | John Smith     | \$2000.00   |
+
+=>Metadata details: (Technical metadata)
+Data Type: float
+Column: due_amount
+Table: CC_Due_Amount
+Schema: credit_card
+Server: credit-card.retail_banking.net
+
+=> Business Metadata:
+Data Domain: Credit Cards
+Line of Business: Retail Banking – Cards
+Business Name: Due Amount (Credit Card)
+Business Definition:
+Amount due at end of billing cycle, i.e., 12th of the particular month for the unique identifiable credit card.
+
+=> Data Quality Checks:(Operational metadata)
+Null Check
+Negative Balance Check
