@@ -32,10 +32,12 @@ Data Warehouse interview question and Answer
 3. ✅ 1. Fact Table
 📌 Definition:
 A fact table stores measurable, quantitative data — typically numeric values that analysts want to aggregate (e.g., sales, revenue, quantity).
+---------------------------------------------------------------------
 
 4.✅ 2. Dimension Tables
 📌 Definition:
 A dimension table stores descriptive, textual attributes that give context to facts. These are often used for filtering, grouping, and labeling in reports.
+----------------------------------------------
 
 5. 🔷 b. Junk Dimension Table
 Combines multiple low-cardinality flags into one table.
@@ -44,6 +46,8 @@ Combines multiple low-cardinality flags into one table.
 | -------- | -------------- | ------------ | ----------- |
 | 1        | Yes            | No           | Yes         |
 
+--------------------------------------------------------------------------------------
+
 6.🔷 d. Audit Tables
 Track ETL execution logs and data load status.
 🧾 Example: etl_log
@@ -51,6 +55,7 @@ Track ETL execution logs and data load status.
 | ------- | ----------- | ---------- | ------------ | ------------------- |
 | 121     | fact\_sales | 10,000     | SUCCESS      | 2025-06-25 01:00:00 |
 
+---------------------------------------------------------------------------------------
 
 7.🧾 Why Use a Factless Fact Table?
 A factless fact table is a special type of fact table in a data warehouse that does not contain any numeric or measurable facts — 
@@ -61,6 +66,8 @@ Captures when something happened.
 | date\_id | student\_id | course\_id | present\_flag |
 | -------- | ----------- | ---------- | ------------- |
 | 20240601 | 501         | CSE101     | Yes           |
+
+---------------------------------------------------------------
 
 8.🕰️ Temporal & Bi-Temporal Data Models in Data Warehousing
 Temporal data models are designed to track changes to data over time. This is especially important for auditability, historical reporting, and compliance.
@@ -84,3 +91,23 @@ This allows you to reconstruct past beliefs about the past, useful for legal, fi
 | 101          | Toronto | 2020-01-01  | 2023-05-15 | 2020-01-01        | 2023-05-20      |
 | 101          | Ottawa  | 2023-05-16  | NULL       | 2023-05-20        | NULL            |
 This means the system learned on 2023-05-20 that Alice moved to Ottawa on 2023-05-16.
+-----------------------------------------------------------------------------------------
+
+9. 📏 What is Granularity in Data Warehousing?
+Granularity refers to the level of detail or depth of information stored in a fact table in a data warehouse.
+🔍 Granularity = “How detailed is the data?”
+Fine-grained (High granularity) → Very detailed
+→ One row per transaction, minute, customer, etc.
+
+Coarse-grained (Low granularity) → Less detailed
+→ One row per day, product category, or region
+
+🎯 Why is Granularity Important?
+Choosing the right granularity impacts:
+🔄 Data size (storage cost)
+⏱️ Query performance
+📊 Analysis flexibility
+🔧 ETL complexity
+---------------------------------------------------------------------------------------------
+
+10.
