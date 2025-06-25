@@ -44,4 +44,14 @@ for item in my_list:
 print(unique)
 
 ----------------------------------------------------------------------------
-5. 
+5.  Find missing numbers in a sequence
+# Given list
+my_list = [1, 2, 4, 6, 7]
+
+# Find missing numbers between min and max
+full_range = set(range(min(my_list), max(my_list) + 1))
+missing = list(full_range - set(my_list))
+
+print(sorted(missing))
+
+
