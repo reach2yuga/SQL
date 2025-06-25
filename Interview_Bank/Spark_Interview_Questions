@@ -1,1 +1,37 @@
+𝟐𝟎 𝐐𝐮𝐞𝐬𝐭𝐢𝐨𝐧𝐬 𝐘𝐨𝐮 𝐍𝐞𝐞𝐝 𝐭𝐨 𝐀𝐧𝐬𝐰𝐞𝐫 𝐭𝐨 𝐓𝐫𝐮𝐥𝐲 𝐌𝐚𝐬𝐭𝐞𝐫 𝐒𝐩𝐚𝐫𝐤 𝐎𝐩𝐭𝐢𝐦𝐢𝐳𝐚𝐭𝐢𝐨𝐧
 
+➤ Why is the DAG (Directed Acyclic Graph) so important in Spark’s execution?
+
+➤ Which serialization format works best for optimizing Spark jobs?
+
+➤ How does Kryo serialization make Spark jobs faster?
+
+➤ What are some practical memory tuning tips for better Spark performance?
+
+➤ How can we reduce unnecessary shuffling in Spark?
+
+➤ When should we use repartition() vs. coalesce(), and how do they affect performance?
+
+➤ How does broadcast join help avoid costly shuffle operations?
+
+➤ What are some best practices for optimizing Spark SQL queries?
+
+➤ What types of joins does Spark support, and which ones are the most efficient?
+
+➤ How does the Broadcast Hash Join actually work behind the scenes?
+
+➤ When should we use cache() vs. persist(), and how do they impact performance?
+
+➤ Should we always go with memory-only storage levels, or is disk-based storage sometimes better?
+
+➤ How does increasing partitions improve performance, and when should we do it?
+
+➤ What’s the key difference between wide and narrow transformations, and why does it matter?
+
+➤ How can we manually control partitioning for better performance?
+
+➤ What are some ways to optimize Spark’s garbage collection to prevent slowdowns?
+
+➤ How should we set up executor and driver memory to avoid OOM (Out of Memory) errors?
+
+➤ What are some advanced tricks for speeding up really large Spark workloads?
