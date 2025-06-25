@@ -11,6 +11,7 @@
 => Then it builds and executes the DAG
 => Allows lazy evaluation and pipelining of transformations
 
+
 ➤ Which serialization format works best for optimizing Spark jobs?
 
 ➤ How does Kryo serialization make Spark jobs faster?
