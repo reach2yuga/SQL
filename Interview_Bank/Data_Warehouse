@@ -1,2 +1,19 @@
 Data Warehouse interview question and Answer
 -----------------------------------------------------------------------------------
+1. what is diff bw OLTP and OLAP?
+| Feature                | **OLTP (Online Transaction Processing)**           | **OLAP (Online Analytical Processing)**             |
+| ---------------------- | -------------------------------------------------- | --------------------------------------------------- |
+| **Purpose**            | Handle **real-time transactions**                  | Perform **complex analysis and reporting**          |
+| **Main Users**         | Operational users (cashiers, app users, CRM staff) | Business analysts, data scientists, executives      |
+| **Data Type**          | Current, transactional data                        | Historical, aggregated data                         |
+| **Operations**         | INSERT, UPDATE, DELETE, SELECT                     | SELECT with joins, aggregations, drill-downs        |
+| **Query Type**         | Short, simple queries                              | Long, complex analytical queries                    |
+| **Schema Design**      | **Normalized** to reduce redundancy                | **De-normalized** (Star/Snowflake schema) for speed |
+| **Speed Optimization** | Optimized for **fast write operations**            | Optimized for **fast read operations**              |
+| **Data Volume**        | Smaller (current state of business)                | Much larger (historical data over time)             |
+| **Backup/Recovery**    | Frequent and essential                             | Periodic and planned                                |
+| **Concurrency**        | Supports high concurrency (many users at once)     | Fewer users querying at the same time               |
+| **Example Queries**    | “Insert new order”, “Update inventory”             | “What were total sales in Q1 by product category?”  |
+
+2. 
+
