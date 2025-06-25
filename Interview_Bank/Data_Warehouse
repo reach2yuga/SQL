@@ -110,4 +110,49 @@ Choosing the right granularity impacts:
 🔧 ETL complexity
 ---------------------------------------------------------------------------------------------
 
-10.
+10. How to Implementing Slowly Changing Dimension (SCD) Type 2 in a data warehouse?
+allows you to track historical changes in dimension data. 
+It keeps both old and new records by using versioning techniques such as start and end dates or active flags.
+| customer\_sk | customer\_id | name  | city    | start\_date | end\_date  | is\_current |
+| ------------ | ------------ | ----- | ------- | ----------- | ---------- | ----------- |
+| 101          | C001         | Alice | Toronto | 2020-01-01  | 2023-05-15 | N           |
+| 102          | C001         | Alice | Ottawa  | 2023-05-16  | NULL       | Y           |
+
+------------------------------------------------------------------------------------
+
+11. 1. ✅ Primary Key (PK)
+Uniquely identifies each row in a table.
+Mostly used in dimension tables.
+📌 Example: In dim_customer, customer_sk (surrogate key) is the primary key.
+
+------------------------------------------------------------------------
+12.🔁 Foreign Key (FK)
+Links a fact table to a dimension table.
+Ensures referential integrity.
+📌 Example: In fact_sales, customer_sk is a foreign key referencing dim_customer.
+
+-------------------------------------------------
+13. 🆔 Surrogate Key
+A system-generated unique identifier (usually an auto-incrementing integer).
+Used in dimension tables to uniquely identify rows and track historical changes (especially with SCDs).
+
+--------------------------------------------------------------------------------
+14. 🧾 Natural (Business) Key
+Comes from the source system, represents a real-world entity.
+Often used to detect changes during ETL.
+📌 Example: customer_id, product_code
+Natural keys are not reliable for uniquely identifying rows over time due to data changes, which is why surrogate keys are preferred in DWs.
+
+---------------------------------------------------------------------------------------------
+15.  🔄 Alternate Key
+An alternative candidate key other than the primary key.
+Often used for lookup operations or ensuring uniqueness on certain columns.
+📌 Example: email might be an alternate key in dim_customer.
+-----------------------------------------------------------------
+16.🧠 Composite Key
+A key made of two or more columns that together uniquely identify a row.
+Common in factless fact tables or bridge tables.
+📌 Example: In fact_attendance:
+PRIMARY KEY (student_id, course_id, date_id)
+
+--------------------------------------------------------------------------
