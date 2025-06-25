@@ -14,6 +14,7 @@
 
 ➤ Which serialization format works best for optimizing Spark jobs?
 
+
 ➤ How does Kryo serialization make Spark jobs faster?
 
 ➤ What are some practical memory tuning tips for better Spark performance?
@@ -45,3 +46,5 @@
 ➤ How should we set up executor and driver memory to avoid OOM (Out of Memory) errors?
 
 ➤ What are some advanced tricks for speeding up really large Spark workloads?
+
+1. Tips to Optimize Spark Jobs for Efficient Processing of Big Data
