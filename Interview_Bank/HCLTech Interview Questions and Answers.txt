@@ -14,10 +14,7 @@ WITH name_ranks AS (
 SELECT id, name
 FROM name_ranks
 WHERE rn = 1;
-
-
-
-
+-------------------------------------------------------------
 
 row_num, rank and dense_rank
 
@@ -59,7 +56,7 @@ SELECT id FROM table2
 WHERE id NOT IN (SELECT id FROM table1)
 ORDER BY id;
 
-
+--------------------------------------------------------------------------
 
 
 input = (1,2,3,4,5)
@@ -73,7 +70,6 @@ for i in input:
 	
 output.append(total)
 
-
-	
+-------------------------------------------------------
 	
 
