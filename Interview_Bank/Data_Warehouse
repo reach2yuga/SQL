@@ -15,5 +15,41 @@ Data Warehouse interview question and Answer
 | **Concurrency**        | Supports high concurrency (many users at once)     | Fewer users querying at the same time               |
 | **Example Queries**    | “Insert new order”, “Update inventory”             | “What were total sales in Q1 by product category?”  |
 
-2. 
+2. Star Schema vs Snowflake Schema ?
 
+| Feature                   | **Star Schema** 🌟                                             | **Snowflake Schema** ❄️                                      |
+| ------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Structure**             | Central fact table linked to **denormalized** dimension tables | Central fact table linked to **normalized** dimension tables |
+| **Normalization**         | Dimension tables are **not normalized** (flattened)            | Dimension tables are **normalized** (split into sub-tables)  |
+| **Joins**                 | Fewer joins needed (faster queries)                            | More joins needed (slower queries)                           |
+| **Query Performance**     | Faster for read-heavy operations                               | Slightly slower due to more complex joins                    |
+| **Storage Space**         | Consumes more storage due to repeated data                     | More efficient storage due to reduced redundancy             |
+| **Design Complexity**     | Simple and easy to understand                                  | More complex to design and maintain                          |
+| **ETL Effort**            | Easier ETL pipelines                                           | Requires more transformation logic                           |
+| **Best Use Case**         | When **query speed** and simplicity are more important         | When **data consistency** and space optimization matter      |
+| **BI Tool Compatibility** | Ideal for tools like Power BI, Tableau                         | Can be more complex for BI tools                             |
+
+3. ✅ 1. Fact Table
+📌 Definition:
+A fact table stores measurable, quantitative data — typically numeric values that analysts want to aggregate (e.g., sales, revenue, quantity).
+
+4.✅ 2. Dimension Tables
+📌 Definition:
+A dimension table stores descriptive, textual attributes that give context to facts. These are often used for filtering, grouping, and labeling in reports.
+
+5. 🔷 b. Junk Dimension Table
+Combines multiple low-cardinality flags into one table.
+🏷️ Example: dim_flags
+| flag\_id | is\_discounted | is\_returned | promo\_used |
+| -------- | -------------- | ------------ | ----------- |
+| 1        | Yes            | No           | Yes         |
+
+6.🔷 d. Audit Tables
+Track ETL execution logs and data load status.
+🧾 Example: etl_log
+| run\_id | table\_name | row\_count | load\_status | timestamp           |
+| ------- | ----------- | ---------- | ------------ | ------------------- |
+| 121     | fact\_sales | 10,000     | SUCCESS      | 2025-06-25 01:00:00 |
+
+
+7.
