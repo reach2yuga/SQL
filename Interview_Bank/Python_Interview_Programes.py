@@ -4,3 +4,44 @@ list2 = [4, 5, 6]
 # Concatenate
 combined = list1 + list2
 print(combined)
+
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+
+list1.extend(list2)  # modifies list1 in-place
+print(list1)
+------------------------------------------------------------------
+2. 
+input = (1,2,3,4,5)
+ 
+output = (1,3,6,10,15) 
+output []
+total = 0
+
+for i in input:
+	total+ = i
+	
+output.append(total)
+
+-------------------------------------------------------------------
+3. factorial programe:
+
+def factorial(n):
+  if n ==0 or n==1
+    return 1
+ else:
+    return n* factorial(n-1)
+
+print(factorial(5)) //120
+----------------------------------------------------------------------------
+4.remove duplicates from a list in Python:
+my_list = [1, 2, 2, 3, 4, 4, 5]
+unique = []
+for item in my_list:
+    if item not in unique:
+        unique.append(item)
+
+print(unique)
+
+----------------------------------------------------------------------------
+5. 
