@@ -1,6 +1,15 @@
 𝟐𝟎 𝐐𝐮𝐞𝐬𝐭𝐢𝐨𝐧𝐬 𝐘𝐨𝐮 𝐍𝐞𝐞𝐝 𝐭𝐨 𝐀𝐧𝐬𝐰𝐞𝐫 𝐭𝐨 𝐓𝐫𝐮𝐥𝐲 𝐌𝐚𝐬𝐭𝐞𝐫 𝐒𝐩𝐚𝐫𝐤 𝐎𝐩𝐭𝐢𝐦𝐢𝐳𝐚𝐭𝐢𝐨𝐧
 
 ➤ Why is the DAG (Directed Acyclic Graph) so important in Spark’s execution?
+=> 2 types of operations perform in spark 1.Transformation 2.Action
+=> The DAG (Directed Acyclic Graph) is a core concept in Apache Spark’s execution model because 
+   it defines how Spark processes data in a distributed and fault-tolerant way.
+=> Spark creates a DAG based on your transformations (e.g., map, filter, groupBy)
+=> It analyzes and optimizes this graph before execution
+=> Transformations are not executed immediately
+=> Spark waits until an action (like count, collect) is triggered
+=> Then it builds and executes the DAG
+=> Allows lazy evaluation and pipelining of transformations
 
 ➤ Which serialization format works best for optimizing Spark jobs?
 
