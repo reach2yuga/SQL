@@ -68,5 +68,20 @@ for char in s:
 	reversed_string = char + reversed_string
 	return reversed_string
 print(reversed_string
+-----------------------------------------------------------------------------------------------
+7. Write a Python program to find the largest element in a list.
+nums = [10, 5, 8, 20, 3]
+
+def largest_number(numbers):
+	largest = numbers[0]
+	for num in numbers:
+	  if num > largest:
+	   largest = num
+	return largest
+largest_no = largest_number(nums)
+print(largest_no)
+
+-----------------------------------------------------------------------
+	
 
 
