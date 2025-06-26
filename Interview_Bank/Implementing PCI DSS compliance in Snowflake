@@ -1,1 +1,29 @@
+PCI DSS stands for Payment Card Industry Data Security Standard. 
+It is a global security standard designed to ensure that all companies that accept, process, store, or transmit credit card information maintain a secure environment.
+
+✅ Steps to Achieve PCI DSS Compliance in Snowflake
+
+1. Choose the Right Edition
+    Use the Business Critical (or higher) Snowflake edition:
+    Enables Tri-Secret Secure, auto-encryption, and HIPAA/PCI workloads.
+    Contact Snowflake sales/support to enable PCI-specific controls.
+2. Restrict and Monitor Access (Req 7, 8, 10)
+🔐 Identity & Access Management:
+    Integrate with SSO/SAML (e.g., Okta, Azure AD).
+    Enforce Multi-Factor Authentication (MFA).
+    Use RBAC (Role-Based Access Control):
+3. Encrypt All Data (Req 3, 4)
+    Data at rest: Automatically encrypted by Snowflake using AES-256.
+    Data in transit: Encrypted using TLS 1.2+.
+    Enable Tri-Secret Secure (optional but useful for enhanced key control).
+4. Minimize Data Retention (Req 3.1)
+    Store only the last 4 digits of card numbers unless absolutely required.
+    Use data masking, tokenization, or external vaults for full PAN data.
+
+✅ What is GDPR?
+GDPR stands for General Data Protection Regulation, a European Union (EU) law effective since May 25, 2018, designed to:
+Protect the privacy and personal data of EU citizens.
+Give individuals more control over their data.
+Require organizations to be transparent, secure, and accountable in their data processing.
+It applies to any organization worldwide that collects or processes personal data of individuals in the EU or EEA—not just EU-based businesses.
 
