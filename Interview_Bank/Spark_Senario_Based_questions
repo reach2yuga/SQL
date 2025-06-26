@@ -1,0 +1,6 @@
+ What is OOM in Spark? Out Of Memory (OOM) 
+=> An OOM (Out of Memory) error occurs when Spark tries to process more data than the executor or driver has memory for — 
+   leading to the application crashing or failing with errors like:
+   java.lang.OutOfMemoryError: Java heap space
+   java.lang.OutOfMemoryError: GC overhead limit exceeded
+=> 
