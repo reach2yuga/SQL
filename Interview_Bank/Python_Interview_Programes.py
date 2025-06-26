@@ -82,6 +82,21 @@ largest_no = largest_number(nums)
 print(largest_no)
 
 -----------------------------------------------------------------------
-	
+8. Write a Python program to find the common elements between two lists.
+list_a = [1, 2, 3, 4, 5]
+list_b = [4, 5, 6, 7, 8]
+
+def common_elements(list_a,list_b):
+	common_element = []
+	for item in list_a:
+		if item in list_b:
+		 common_element.append(item)
+	retrun common_element
+
+found_common_elemet = common_elemements(list_a,list_b)
+print(found_common_elemet)
+--------------------------------------------
+			
+		 
 
 
