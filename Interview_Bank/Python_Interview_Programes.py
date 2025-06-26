@@ -54,4 +54,19 @@ missing = list(full_range - set(my_list))
 
 print(sorted(missing))
 
+---------------------------------------------------------------------------------------
+6.  Reverse string programe:
+input_string = "Yugandhara"
+reverse_string = input_string(::-1)
+print(reverse_string)
+
+input_string = "Yugandhara"
+
+def reverse_string(s):
+reversed_string = ""
+for char in s:
+	reversed_string = char + reversed_string
+	return reversed_string
+print(reversed_string
+
 
