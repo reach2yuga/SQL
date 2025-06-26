@@ -4,3 +4,30 @@
    java.lang.OutOfMemoryError: Java heap space
    java.lang.OutOfMemoryError: GC overhead limit exceeded
 => 
+
+------------------------------------------------------------------------------
+How to split a full name column into first and last name?
+# Column: full_name = "John Doe"
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import split, col
+
+spark = SparkSession.builder \
+    .appName("SplitFullNameExample") \
+    .getOrCreate()
+
+data = [("John Doe",)]
+df = spark.createDataFrame(data, ["full_name"])
+
+df = df.withColumn("names", split(col("full_name"), " "))
+
+df = df.withColumn("first_name", col("names").getItem(0)) \
+       .withColumn("last_name",  col("names").getItem(1)) \
+       .drop("names")
+
+df.show()
++---------+----------+---------+
+|full_name|first_name|last_name|
++---------+----------+---------+
+| John Doe|      John|      Doe|
++---------+----------+---------+
+-----------------------------------------------------------------------------
