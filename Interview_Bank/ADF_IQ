@@ -95,3 +95,59 @@ Inside the ForEach, use a Copy activity to copy each file’s content into the S
 This way, you only need one pipeline to handle all 100 files.
 
 🟢 5. How to handle duplicate rows in a Data Flow?
+
+
+
+🔹 Interview Experience | Azure Data Engineer Role at Infovision 🔹
+
+I recently attended an interview for an Azure Data Engineer position with Infovision and wanted to share some insightful and practical questions that were discussed — covering everything from ADF design and SQL problem-solving.
+
+🧩 Azure Data Factory (ADF):
+✅ How do you implement SCD Type 2 in ADF?
+
+✅ How do you optimize ADF Copy Activity for better performance?
+
+✅ What is the purpose of the Until activity, and how does it function?
+
+✅ What are the different metadata options available in the GetMetadata activity?
+
+✅ Scenario: You have 3 on-prem sources and 2 REST API sources, and need to load them into Azure SQL DB. How would you architect the solution using ADF?
+
+🧮 SQL Scenario Questions:
+1️⃣ Find products with continuously increasing sales over 3 consecutive months
+📊 Input Table: product_sales
+
+product_id month sales
+1 2024-01-01 100
+1 2024-02-01 120
+1 2024-03-01 150
+1 2024-04-01 90
+2 2024-01-01 200
+2 2024-02-01 180
+2 2024-03-01 160
+3 2024-01-01 50
+3 2024-02-01 70
+3 2024-03-01 100
+3 2024-04-01 120
+4 2024-02-01 30
+4 2024-03-01 60
+4 2024-04-01 90
+
+🎯 Goal: Identify product IDs where sales increased for at least 3 consecutive months.
+
+2️⃣ Detect fraudulent transactions where the same user made multiple transactions within 5 minutes
+📊 Input Table: transactions
+
+transaction_id user_id amount transaction_time
+1 101 500 2024-03-28 10:00:00
+2 102 200 2024-03-28 10:01:30
+3 101 1000 2024-03-28 10:03:45
+4 103 700 2024-03-28 10:10:00
+5 101 300 2024-03-28 10:07:00
+6 104 150 2024-03-28 10:15:00
+7 102 250 2024-03-28 10:05:00
+8 102 300 2024-03-28 10:06:00
+9 103 600 2024-03-28 10:14:30
+10 101 900 2024-03-28 10:20:00
+
+🎯 Goal: Detect users who made 2 or more transactions within a 5-minute window.
