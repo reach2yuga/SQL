@@ -62,8 +62,49 @@ df.printSchema()
 => If a stage has 4 partitions, it will launch 4 tasks—one per partition.
 => Tasks are executed in parallel across the cluster's cores.
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. lets I have 10 partitions and I want to assign number of CPU core as well to that spark job so how do you give no CPU core you needed?
+=> ✅ CPU Core Allocation & Partitions
+  Each task = 1 partition = 1 core (at a time).
+  So if you have:
+  10 partitions → up to 10 tasks.
+  Assigning more than 10 cores = wasted resources.
+  Executor tuning rule of thumb:
+  Try to align number of partitions with total number of available cores.
+-----------------------------------------------------------------------------------------
+5.Suppose you have 2 wide transformations and one action in spark job and probably if you are handling 2 GB data so how many park job, stages and task you will get?
+✅ Given:
+1 Action
+2 Wide Transformations
+2 GB of data
+ Let's assume default partition size is 128 MB
 
+1. Number of Partitions
+If default partition size is 128 MB:
+  2 GB = 2048 MB
+  2048 / 128 = 16 partitions
+  So, Spark will likely create 16 partitions.
 
+2. Wide Transformations
+Each wide transformation results in a shuffle, which creates a new stage.
+Stage 1 → before 1st wide transformation
+Stage 2 → before 2nd wide transformation
+Stage 3 → final stage triggered by the action
+✅ Total Stages = 3
+
+3. Tasks
+Each stage will have one task per partition.
+Assuming the number of partitions remains consistent and no coalesce/repartition is done:
+Stage 1 → 16 tasks
+Stage 2 → 16 tasks
+Stage 3 → 16 tasks
+✅ Total Tasks = 16 x 3 = 48
+
+4. Jobs
+Only one action is mentioned → so only 1 job is triggered.
+✅ Jobs = 1
+-------------------------------------------------------------------------------------------------------------------
+6. Repartition vs Coalesce
 
 
 
