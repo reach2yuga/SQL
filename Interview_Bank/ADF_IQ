@@ -1,0 +1,57 @@
+✅ Question 1: Why do we need Azure Data Factory (ADF)?
+ADF doesn’t store data. Instead, it lets you:
+Create data-driven workflows
+Move and transform data between different stores
+Monitor and manage those workflows using UI or code
+
+✅ Question 2: What is Azure Data Factory?
+ADF is a cloud-based data integration service used for:
+Creating pipelines
+Automating data movement and transformation
+Running them on a scheduled basis (hourly, daily, weekly)
+
+✅ Question 3: What is Integration Runtime (IR)?
+Integration Runtime is the infrastructure ADF uses to:
+Move data between environments
+Execute data transformation
+There are 3 types:
+Azure IR – For cloud-based data movements
+Self-hosted IR – Installed on on-prem or VM
+Azure SSIS IR – For executing SSIS packages in ADF
+
+✅ Question 4: Is there a limit on Integration Runtimes?
+No hard limit on instances, but there is a VM core limit per subscription (especially relevant for SSIS).
+
+✅ Question 5: Azure Data Lake vs. Azure Data Warehouse
+| Feature             | Data Lake                        | Data Warehouse          |
+| ------------------- | -------------------------------- | ----------------------- |
+| Data type           | Raw, unstructured                | Structured, filtered    |
+| Processing language | One (e.g., U-SQL)                | SQL                     |
+| Storage             | Scalable for logs, IoT, big data | Optimized for analytics |
+
+
+✅ Question 6: What is Azure Blob Storage?
+Stores unstructured data like text, binaries
+Use cases: backups, streaming, distributed access
+
+✅ Question 6: What is Azure Blob Storage?
+Stores unstructured data like text, binaries
+Use cases: backups, streaming, distributed access
+
+✅ Question 7: Data Lake Storage vs. Blob Storage
+Data Lake: Stores files with hierarchical namespace
+Blob: Object storage with flat structure
+Data Lake is better for analytics, ML, Blob is great for media, backup
+
+✅ Question 8: Steps for creating ETL in ADF
+Create linked service (source)
+Create linked service (destination)
+Create datasets
+Build pipeline
+Add trigger to run ETL
+
+✅ Question 10: Top-level concepts in ADF
+Pipeline – Container of processes
+Activities – Actual operations
+Dataset – Metadata for data
+Linked Service – Connection config
