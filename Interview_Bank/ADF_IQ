@@ -55,3 +55,43 @@ Pipeline – Container of processes
 Activities – Actual operations
 Dataset – Metadata for data
 Linked Service – Connection config
+
+✅ Question 11: How to schedule a pipeline?
+Use a Schedule Trigger (daily, weekly) or Event Trigger (e.g., blob created)
+
+✅ Question 12: Can we pass parameters to pipeline run?
+Yes, parameters are top-level objects and can be passed at runtime.
+
+✅ Question 14: Two levels of security in ADLS Gen2
+RBAC – Who can manage/see the service
+ACLs – Who can read/write/execute specific files (POSIX-compliant)
+
+✅ Question 15: Private Preview vs Public Preview in Data Flows
+No need to bring your own Databricks
+ADF manages clusters
+Supports both Blob and ADLS Gen2
+
+✅ Question 16: Dataset vs Linked Service
+Linked Service: Connection config (e.g., SQL server & credentials)
+Dataset: Data schema or file/table to work with
+
+✅ Question 18: ADF Compute Environments
+On-Demand (managed) – ADF creates and removes compute automatically
+Bring Your Own – You manage the compute (e.g., your own Azure Databricks)
+
+✅ Question 19: What is Azure SSIS IR?
+A managed VM cluster to run SSIS packages in ADF. Can be scaled up/down.
+
+✅ Question 22: How to copy data from on-prem SQL to cloud?
+Use Self-hosted Integration Runtime
+Installed on-prem where SQL Server exists
+
+🟢 2. Scenario: 100 files in Azure Blob Storage need to be loaded into a SQL table
+What’s the best approach?
+A bad approach would be to create 100 pipelines — one for each file. Instead, use a dynamic and scalable solution:
+Use Get Metadata activity to retrieve the list of all 100 files.
+Pass the output to a ForEach activity.
+Inside the ForEach, use a Copy activity to copy each file’s content into the SQL table.
+This way, you only need one pipeline to handle all 100 files.
+
+🟢 5. How to handle duplicate rows in a Data Flow?
