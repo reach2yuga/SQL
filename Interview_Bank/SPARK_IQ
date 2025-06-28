@@ -144,6 +144,9 @@ Ideal for writing output to fewer files.
 Doesn’t evenly distribute data.
 May cause data skew if merged into too few partitions.
 
+--------------------------------------------------------------------------------------------------------
+7. 
+
 
 
 
