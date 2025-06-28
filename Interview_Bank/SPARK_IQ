@@ -105,6 +105,46 @@ Only one action is mentioned → so only 1 job is triggered.
 ✅ Jobs = 1
 -------------------------------------------------------------------------------------------------------------------
 6. Repartition vs Coalesce
+=> The difference between repartition() and coalesce() in Spark is a fundamental concept in performance optimization and data shuffling.
+🟨 1. repartition()
+✅ Description:
+repartition(n) reshuffles the data across n partitions with a full shuffle, which means all data is re-distributed across the cluster. 
+This transformation is wide because it involves shuffling across nodes.
+🔧 Internal Behavior:
+Breaks all current partitioning.
+Randomly re-distributes the data.
+Uses a round-robin or hash partitioning (if column-based).
+Ensures even distribution of data across all n partitions.
+df = df.repartition(10)  # full shuffle, evenly splits data into 10 partitions
+df = df.repartition("country")  # repartition by column using hash partitioner
+
+📉 Pros:
+Good for increasing parallelism.
+Helps in load balancing before wide transformations like groupBy, join.
+
+⚠️ Cons:
+Expensive due to full shuffle.
+Can slow down jobs significantly if used unnecessarily.
+
+🟩 2. coalesce()
+✅ Description:
+coalesce(n) reduces the number of partitions by merging adjacent ones. It avoids full shuffling, which makes it efficient, especially when decreasing partitions.
+
+🔧 Internal Behavior:
+Reuses existing partitions.
+Merges them without data movement across nodes.
+It’s a narrow transformation, meaning it doesn’t shuffle data.
+df = df.coalesce(1)  # merge into 1 partition, e.g., before writing to a single file
+
+📉 Pros:
+Fast and efficient when reducing partition count.
+Ideal for writing output to fewer files.
+
+⚠️ Cons:
+Doesn’t evenly distribute data.
+May cause data skew if merged into too few partitions.
+
+
 
 
 
