@@ -31,7 +31,7 @@ df.show()
 | John Doe|      John|      Doe|
 +---------+----------+---------+
 -----------------------------------------------------------------------------
-3. 1. Have you worked with corrupted records?
+3. 1. Have you worked with corrupted records? => YES
    2. when do you say that its corrupted records?
    3. what happen when we encounter with corrupted records in different read mode?
    4. How can we print bad records?
@@ -53,3 +53,41 @@ id,name,age,salary,address,nominee
 | **DROPMALFORMED** | 3 (Rows 1, 2, 5 – rows 3 & 4 dropped)                                                                 |
 | **FAILFAST**      | 2 (Fails immediately at Row 3)                                                                        |
 
+df = spark.read.format("csv")\
+                .option("header", True)\
+                .option("inferSchema",True)\
+                .option("mode","PERMISSIVE")\
+                .load("dbfs:/Volumes/workspace/default/pyspark-project-files/handling_corrupted_data.csv")
+df.show()
++---+--------+---+------+------------+----------+
+| id|    name|age|salary|     address|   nominee|
++---+--------+---+------+------------+----------+
+|  1|  Manish| 26| 75000|       bihar|nominee1  |
+|  2|  Nikita| 23|100000|uttarpradesh|nominee2  |
+|  3|  Pritam| 22|150000|   Bangalore|     India|
+|  4|Prantosh| 17|200000|     Kolkata|     India|
+|  5|  Vikash| 31|300000|        NULL|  nominee5|
++---+--------+---+------+------------+----------+
+
+df = spark.read.format("csv")\
+                .option("header", True)\
+                .option("inferSchema",True)\
+                .option("mode","FAILFAST")\
+                .load("dbfs:/Volumes/workspace/default/pyspark-project-files/handling_corrupted_data.csv")
+df.show()
+It will fail
+
+df = spark.read.format("csv")\
+                .option("header", True)\
+                .option("inferschema", True)\
+                .option("badRecordsPath","dbfs:/Volumes/workspace/default/pyspark-project-files/bad_records")\
+                .load("dbfs:/Volumes/workspace/default/pyspark-project-files/handling_corrupted_data.csv")
+df.show(truncate = False)
++---+------+---+------+------------+----------+
+|id |name  |age|salary|address     |nominee   |
++---+------+---+------+------------+----------+
+|1  |Manish|26 |75000 |bihar       |nominee1  |
+|2  |Nikita|23 |100000|uttarpradesh|nominee2  |
+|5  |Vikash|31 |300000|NULL        |nominee5  |
++---+------+---+------+------------+----------+
+---------------------------------------------------------------------------------------------------
