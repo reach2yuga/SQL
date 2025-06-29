@@ -178,7 +178,9 @@ Types of Transformation:
 => send above table half data on 1 executor and 1 on another excutor
 
 ------------------------------------------------------------------------------------------------------------
-
+8. DAG creation and LAzy Evaluation:
+	=> DAG - Directed Acyclic Graph what ever transformation jobs we performed it created DAG for that.
+	=> Until we hit action these transformation will never performed.
 
 
 
