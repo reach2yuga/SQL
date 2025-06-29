@@ -145,7 +145,39 @@ Doesn’t evenly distribute data.
 May cause data skew if merged into too few partitions.
 
 --------------------------------------------------------------------------------------------------------
-7. 
+7. Transformation and Actions in Spark
+----------------------------------------------
+1. What is transformation and how many types of transformation do we have?
+2. what happens when we use group by or join in transformation?
+3. How jobs are created in spark?
+
+Types of Transformation:
+1. Narrow dependancy transformation:
+   => These are transformation which doesnt reuired data movement between partition (eg. Filter ,select ,union,map etc)
+
+2. Wide dependancy transformation:
+   => join,groupby, distinct etc.
+| Id | Name    | Age | Income | Source      |
+| -- | ------- | --- | ------ | ----------- |
+| 1  | Manish  | 26  | 7500   | Job         |
+| 2  | Roushan | 16  | 35000  | Job         |
+| 3  | Mukesh  | 35  | 12000  | Teaching    |
+| 7  | Nikita  | 55  | 9000   | Youtube     |
+| 15 | Vikash  | 15  | 25000  | Freelancing |
+| 3  | Mukesh  | 35  | 29000  | Job         |
+| 15 | Vikash  | 15  | 40000  | Job         |
+| 1  | Manish  | 26  | 25000  | Youtube     |
+| 8  | Roshni  | 42  | 62000  | Job         |
+| 2  | Roushan | 16  | 16000  | Teaching    |
+
+1. show me the employee whose age greater than 18?
+	=> 
+2. find out total income of each employee?
+
+200mb/128mb = 2 partition
+=> send above table half data on 1 executor and 1 on another excutor
+
+------------------------------------------------------------------------------------------------------------
 
 
 
