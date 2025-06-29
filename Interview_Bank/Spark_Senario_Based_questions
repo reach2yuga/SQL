@@ -31,3 +31,25 @@ df.show()
 | John Doe|      John|      Doe|
 +---------+----------+---------+
 -----------------------------------------------------------------------------
+3. 1. Have you worked with corrupted records?
+   2. when do you say that its corrupted records?
+   3. what happen when we encounter with corrupted records in different read mode?
+   4. How can we print bad records?
+   5. where do you store bad records and how to access later?
+
+id,name,age,salary,address,nominee
+1,Manish,26,75000,bihar,nominee1  
+2,Nikita,23,100000,uttarpradesh,nominee2  
+3,Pritam,22,150000,Bangalore,India,nominee3  
+4,Prantosh,17,200000,Kolkata,India,nominee4  
+5,Vikash,31,300000,,nominee5
+
+❌ Row 3: Too many fields (7 instead of 6 due to Bangalore,India)
+❌ Row 4: Too many fields (7 instead of 6 due to Kolkata,India)
+
+| Mode              | Valid Records                                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------------------------- |
+| **PERMISSIVE**    | 3 (Rows 1, 2, 5 – rows 3 & 4 malformed but included with `null` in extra fields or `_corrupt_record`) |
+| **DROPMALFORMED** | 3 (Rows 1, 2, 5 – rows 3 & 4 dropped)                                                                 |
+| **FAILFAST**      | 2 (Fails immediately at Row 3)                                                                        |
+
