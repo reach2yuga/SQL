@@ -181,6 +181,38 @@ Types of Transformation:
 8. DAG creation and LAzy Evaluation:
 	=> DAG - Directed Acyclic Graph what ever transformation jobs we performed it created DAG for that.
 	=> Until we hit action these transformation will never performed.
+-------------------------------------------------------------------
+9. How to remove duplicate from pyspark:
+		1. distinct
+		2. dropDuplicats( / drop_duplicates()
+		3. windows function with row_number()
+		4. groupby() with count()
+
+id,name,loc,updated_date
+1,ravi,bangalore,2021-01-01
+1,ravi,chennai,2022-02-02
+1,ravi,Hyderabad,2022-06-10
+2,Raj,bangalore,2021-01-01
+2,Raj,chennai,2022-02-02
+3,Raj,Hyderabad,2022-06-10
+4,Prasad,bangalore,2021-01-01
+5,Mahesh,chennai,2022-02-02
+4,Prasad,Hyderabad,2022-06-10
+
+df= spark.read.csv("/scenarios/duplicates.csv",header=True,inferSchema=True)
+df.printSchema()
+from pyspark.sql.functions import col
+display(df.orderBy(col("updated_date").desc()).dropDuplicates(["id"]))
+
+Window function with row_number():
+
+from pyspark.sql.window import Window
+from pyspark.sql.functions import *
+df = df.withColumn("rowid",row_number().over(Window.partitionBy("id").orderBy(col("updated_date").desc())))
+     df_uniq = df.filter("rowid=1")  
+df_baddata = df.filter("rowid>1")   
+
+display(df_uniq)
 
 
 
