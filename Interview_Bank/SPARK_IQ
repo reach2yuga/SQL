@@ -213,6 +213,15 @@ df = df.withColumn("rowid",row_number().over(Window.partitionBy("id").orderBy(co
 df_baddata = df.filter("rowid>1")   
 
 display(df_uniq)
+-------------------------------------------------------------------------------
+10. Discuss the map() transformation in PySpark DataFrame with the help of an example.
+	=> map() is an RDD transformation that applies a function to each element in the RDD and returns a new RDD.
+	=> It is a one-to-one transformation: each input element maps to exactly one output element.
+	=> PySpark DataFrames do not have a map() method. To use map(), you must convert the DataFrame to an RDD first.
+--------------------------------------------
+11. What do you mean by ‘joins’ in PySpark DataFrame? What are the different types of joins?
+	=> Joins in PySpark are used to join two DataFrames together,and by linking them together, one may join several DataFrames.
+	=> Inner join,left join, full join,right outer
 
 
 
