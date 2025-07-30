@@ -62,12 +62,11 @@ print(reverse_string)
 
 input_string = "Yugandhara"
 
-def reverse_string(s):
-reversed_string = ""
+s = "yugandhara"
+reversed_str = ''
 for char in s:
-	reversed_string = char + reversed_string
-	return reversed_string
-print(reversed_string
+    reversed_str = char + reversed_str
+print(reversed_str)  # Output: arahdnaguy
 -----------------------------------------------------------------------------------------------
 7. Write a Python program to find the largest element in a list.
 nums = [10, 5, 8, 20, 3]
