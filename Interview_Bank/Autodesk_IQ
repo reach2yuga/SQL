@@ -1,1 +1,37 @@
+- Write a query to pivot rows into columns using SQL.
 
+CREATE TABLE employee_metrics (
+  employee_id INT,
+  metric VARCHAR(20),
+  value DECIMAL(10,2)
+);
+
+INSERT INTO employee_metrics VALUES
+(1, 'salary', 75000.00),
+(1, 'rating', 4.50),
+(1, 'tenure', 5.00),
+(2, 'salary', 68000.00),
+(2, 'rating', 3.80),
+(2, 'tenure', 2.50);
+
+select * from employee_metrics
+
+employee_id metric value
+1	salary	75000.00
+1	rating	4.50
+1	tenure	5.00
+2	salary	68000.00
+2	rating	3.80
+2	tenure	2.50
+
+SELECT
+  employee_id,
+  MAX(CASE WHEN metric = 'salary' THEN value END) AS salary,
+  MAX(CASE WHEN metric = 'rating' THEN value END) AS rating,
+  MAX(CASE WHEN metric = 'tenure' THEN value END) AS tenure
+FROM employee_metrics
+GROUP BY employee_id;
+ - How would you detect anomalies in time-series order data using SQL?
+ - Use a window function to find a running average over the last 7 days.
+ - Explain when and why you'd use CTEs vs subqueries.
+ - Write a query to find the first purchase made by each user.
