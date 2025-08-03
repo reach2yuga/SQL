@@ -39,7 +39,7 @@ FROM employee_metrics
 GROUP BY employee_id;
 
 ----------------------------------------------------------------------------------------------
- -- Use a window function to find a running average over the last 7 days.
+ -- 2 Use a window function to find a running average over the last 7 days.
 
  -- Create table
 CREATE TABLE daily_sales (
@@ -70,7 +70,7 @@ FROM daily_sales;
 
 
 ---------------------------------------------------------------
---Write a query to find the first purchase made by each user.
+--3 Write a query to find the first purchase made by each user.
 
 
 -- Create purchases table
@@ -104,4 +104,89 @@ FROM (
 ) ranked
 WHERE purchase_rank = 1;
 
+-------------------------------------------------------------------------------------
+4 -- Identify Autodesk Whale Users
+--------------------------------------------------------------------------------------------------------------------------------------
+5. --At Autodesk, we have multiple software products and it's vital to measure user satisfaction.
+--A unique review is submitted by a user for a product each month,
+--identified by a user_id, product_id, submit_date and rating out of 5 stars. In this question, you're 
+--to write a SQL query that calculates the average rating (stars) of each product for each month. 
+--Assume that the submit_date is in the 'YYYY-MM-DD HH:MI:SS' format.
 
+--reviews Example Input:
+
+review_id	user_id	submit_date	product_id	stars
+6171	123	2021-06-08 00:00:00	50001	4
+7802	265	2021-06-10 00:00:00	69852	4
+5293	362	2021-06-18 00:00:00	50001	3
+6352	192	2021-07-26 00:00:00	69852	3
+4517	981	2021-07-05 00:00:00	69852	2
+
+--Expected Output:
+month	product_id	average_rating
+6	50001	3.50
+6	69852	4.00
+7	69852	2.50
+
+
+-- Create the reviews table
+CREATE TABLE reviews (
+    review_id INT PRIMARY KEY,
+    user_id INT NOT NULL,
+    submit_date DATETIME NOT NULL,
+    product_id INT NOT NULL,
+    stars INT NOT NULL CHECK (stars BETWEEN 1 AND 5)
+);
+
+-- Insert sample data
+INSERT INTO reviews (review_id, user_id, submit_date, product_id, stars) VALUES
+(6171, 123, '2021-06-08 00:00:00', 50001, 4),
+(7802, 265, '2021-06-10 00:00:00', 69852, 4),
+(5293, 362, '2021-06-18 00:00:00', 50001, 3),
+(6352, 192, '2021-07-26 00:00:00', 69852, 3),
+(4517, 981, '2021-07-05 00:00:00', 69852, 2)
+-- Additional sample data for demonstration
+(8912, 123, '2021-06-22 00:00:00', 50001, 5),
+(7345, 265, '2021-07-15 00:00:00', 50001, 4),
+(8123, 362, '2021-07-20 00:00:00', 69852, 1),
+(9234, 192, '2021-08-03 00:00:00', 50001, 3),
+(4567, 981, '2021-08-12 00:00:00', 69852, 5);
+
+
+SELECT 
+    YEAR(submit_date) AS year,
+    MONTH(submit_date) AS month,
+    product_id,
+    ROUND(AVG(stars * 1.0), 2) AS average_rating,
+    COUNT(*) AS review_count
+FROM 
+    reviews
+GROUP BY 
+    YEAR(submit_date),
+    MONTH(submit_date),
+    product_id
+ORDER BY 
+    year,
+    month, 
+    product_id;
+
+-------------------------------------------SPARK / PYSPARK ---------------------------------------------------------------------------
+“Why did you choose Spark?”, “How did you ensure scalability?” and “What would you do differently if the data size doubled?”
+1. Why Spark?
+"We chose Spark for its distributed in-memory processing, scalability for large datasets, and unified ecosystem (SQL, streaming, ML). It outperforms disk-based frameworks like MapReduce and simplifies development with high-level APIs."
+
+2. Scalability?
+"By partitioning data optimally, tuning cluster resources (executors/cores/memory), minimizing shuffles via broadcast joins, and using Spark’s dynamic allocation. We monitored performance with Spark UI to address skew or bottlenecks."
+
+3. If data doubled?
+*"Scale the cluster horizontally (add nodes). Re-tune partitions, shuffle settings, and memory configs. Check for new skew in joins/aggregations, leverage Spark 3’s Adaptive Query Execution, and optimize data layout (e.g., partitioning in Parquet)."*
+
+Key Tips for Interviews:
+
+Be specific: Mention tools (e.g., "Spark UI," "Parquet").
+
+Show depth: Highlight how you tuned (e.g., "set spark.sql.shuffle.partitions = 1000").
+
+Adapt: If asked for more detail, expand on one tactic (e.g., partitioning strategy).
+
+------------------------------------------------------------------------------------
