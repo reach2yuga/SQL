@@ -43,3 +43,121 @@ Dense_Rank():
 Usage Case: Both rank(),denserank() function used to find nth highest salary 
             when there is tie
 			
+
+-------------------------------------------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx------------------------------------------------------------------
+--------------------------------------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-----------------------------------------------------------
+
+-- Create employees table
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    department VARCHAR(50),
+    salary DECIMAL(10,2),
+    hire_date DATE,
+    sales DECIMAL(10,2)  -- For sales-related examples
+);
+
+-- Insert sample data
+INSERT INTO employees VALUES
+(1, 'John Smith', 'Sales', 75000.00, '2018-05-15', 120000.00),
+(2, 'Sarah Johnson', 'IT', 85000.00, '2017-03-22', NULL),
+(3, 'Michael Brown', 'Sales', 68000.00, '2019-11-05', 95000.00),
+(4, 'Emily Davis', 'HR', 72000.00, '2018-07-30', NULL),
+(5, 'Robert Wilson', 'IT', 92000.00, '2016-09-12', NULL),
+(6, 'Lisa Miller', 'Sales', 81000.00, '2020-02-18', 110000.00),
+(7, 'David Lee', 'Marketing', 69000.00, '2019-08-10', NULL),
+(8, 'Jennifer Clark', 'IT', 88000.00, '2017-11-27', NULL),
+(9, 'Thomas Taylor', 'Sales', 73000.00, '2018-04-03', 105000.00),
+(10, 'Jessica White', 'HR', 76000.00, '2019-01-15', NULL);
+
+-- Create sales table for time-based examples
+CREATE TABLE sales (
+    sale_id INT PRIMARY KEY,
+    emp_id INT,
+    sale_date DATE,
+    amount DECIMAL(10,2),
+    region VARCHAR(50)
+);
+
+INSERT INTO sales VALUES
+(101, 1, '2023-01-05', 5000.00, 'East'),
+(102, 3, '2023-01-10', 3500.00, 'West'),
+(103, 1, '2023-01-15', 4200.00, 'East'),
+(104, 6, '2023-01-20', 7100.00, 'North'),
+(105, 9, '2023-01-25', 3800.00, 'South'),
+(106, 3, '2023-02-01', 2900.00, 'West'),
+(107, 6, '2023-02-05', 6500.00, 'North'),
+(108, 1, '2023-02-10', 5300.00, 'East'),
+(109, 9, '2023-02-15', 4100.00, 'South'),
+(110, 6, '2023-02-20', 7200.00, 'North');
+
+select * from employees
+select * from sales
+
+
+-- Row number, rank, and dense rank by salary
+SELECT 
+    emp_name,
+    department,
+    salary,
+    ROW_NUMBER() OVER(ORDER BY salary DESC) AS row_num,
+    RANK() OVER(ORDER BY salary DESC) AS rank,
+    DENSE_RANK() OVER(ORDER BY salary DESC) AS dense_rank
+FROM employees;
+
+ SELECT 
+    emp_name, 
+    salary,
+    ROW_NUMBER() OVER(ORDER BY salary DESC) AS rank
+FROM employees;
+
+
+-- What if two employees have the same salary?
+SELECT 
+    emp_name, 
+    salary,
+    RANK() OVER(ORDER BY salary DESC) AS rank
+FROM employees;
+
+SELECT 
+    emp_name, 
+    salary,
+    DENSE_RANK() OVER(ORDER BY salary DESC) AS rank
+FROM employees;
+
+SELECT 
+    emp_name, 
+    salary,
+    NTILE(4) OVER(ORDER BY salary) AS quartile
+FROM employees;
+
+
+--NTILE(4) 
+--NTILE(4) is a window function that divides rows into approximately
+--equal groups (quartiles in this case). When used with PARTITION BY department, 
+--it creates these groups separately for each department.
+
+--Handling Uneven Groups
+--When employee counts aren't divisible by 4:
+--The first groups get extra members
+--Example: 5 employees → Quartiles: 2, 2, 1, 1
+--Example: 6 employees → Quartiles: 2, 
+
+SELECT 
+    emp_name,
+    department,
+    salary,
+    NTILE(3) OVER(
+        PARTITION BY department 
+        ORDER BY salary DESC
+    ) AS salary_quartile
+FROM employees;
+
+-- How quartiles work with 5 employees
+Department | Employee | Salary | NTILE(4)
+-----------|----------|--------|---------
+Sales      | A        | 100K   | 1
+Sales      | B        | 95K    | 1  <- Extra in Q1
+Sales      | C        | 90K    | 2
+Sales      | D        | 85K    | 3
+Sales      | E        | 80K    | 4
