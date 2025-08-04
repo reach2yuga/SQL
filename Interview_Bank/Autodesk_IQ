@@ -106,6 +106,7 @@ WHERE purchase_rank = 1;
 
 -------------------------------------------------------------------------------------
 4 -- Identify Autodesk Whale Users
+
 --------------------------------------------------------------------------------------------------------------------------------------
 5. --At Autodesk, we have multiple software products and it's vital to measure user satisfaction.
 --A unique review is submitted by a user for a product each month,
