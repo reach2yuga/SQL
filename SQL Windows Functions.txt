@@ -161,3 +161,53 @@ Sales      | B        | 95K    | 1  <- Extra in Q1
 Sales      | C        | 90K    | 2
 Sales      | D        | 85K    | 3
 Sales      | E        | 80K    | 4
+
+
+-----------------------
+--LAG and LEAD Functions
+--LAG and LEAD are positional window functions that allow you to access data from previous or subsequent rows in a result set.
+--hey are essential for trend analysis, period-over-period comparisons, and sequential data processing.
+
+CREATE TABLE sales (
+    sale_id INT PRIMARY KEY,
+    emp_id INT,
+    sale_date DATE,
+    amount DECIMAL(10,2),
+    region VARCHAR(20)
+);
+
+INSERT INTO sales VALUES
+(101, 1, '2023-01-05', 5000.00, 'East'),
+(102, 3, '2023-01-10', 3500.00, 'West'),
+(103, 1, '2023-01-15', 4200.00, 'East'),
+(104, 6, '2023-01-20', 7100.00, 'North'),
+(105, 9, '2023-01-25', 3800.00, 'South'),
+(106, 3, '2023-02-01', 2900.00, 'West'),
+(107, 6, '2023-02-05', 6500.00, 'North'),
+(108, 1, '2023-02-10', 5300.00, 'East'),
+(109, 9, '2023-02-15', 4100.00, 'South'),
+(110, 6, '2023-02-20', 7200.00, 'North');
+
+select * from sales
+
+--Compare to Previous Sale (All Employees)
+
+SELECT 
+    sale_date,
+    emp_id,
+    amount,
+    LAG(amount) OVER(ORDER BY sale_date) AS prev_sale_amount,
+    amount - LAG(amount) OVER(ORDER BY sale_date) AS diff_from_prev
+FROM sales;
+
+
+--Compare to Next Sale
+SELECT 
+    sale_date,
+    emp_id,
+    amount,
+    LEAD(amount) OVER(ORDER BY sale_date) AS next_sale_amount,
+    LEAD(amount) OVER(ORDER BY sale_date) - amount AS diff_to_next
+FROM sales;
+
+------------------------
