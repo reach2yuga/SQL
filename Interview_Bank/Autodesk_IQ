@@ -191,3 +191,6 @@ Show depth: Highlight how you tuned (e.g., "set spark.sql.shuffle.partitions = 1
 Adapt: If asked for more detail, expand on one tactic (e.g., partitioning strategy).
 
 ------------------------------------------------------------------------------------
+---------------------------------------------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx----------------------------------------------------------------
+Data modelling:
+
