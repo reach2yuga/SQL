@@ -124,3 +124,16 @@ Heavy transformations
 More CPU & memory allocated
 Queries run faster
 Cost increases per second
+
+2️⃣ Horizontal Scaling (Multi-Cluster Warehouse)
+Instead of increasing size, you add more clusters.
+
+    ALTER WAREHOUSE my_wh 
+SET MIN_CLUSTER_COUNT = 1
+MAX_CLUSTER_COUNT = 3
+SCALING_POLICY = AUTO;
+
+📌 What happens?
+If many users submit queries at the same time
+Snowflake automatically adds clusters
+Reduces query queuing
