@@ -97,3 +97,30 @@ FROM TABLE(INFORMATION_SCHEMA.QUERY_HISTORY()) QH
 ORDER BY QH.START_TIME DESC
 LIMIT 5;
 ----------------------------------------------------------------------------------------------------------------------------
+6. What are virtual warehouses and how do they scale?
+In Snowflake, a Virtual Warehouse is the compute layer used to execute queries. It is completely separate from storage,
+🔹 What is a Virtual Warehouse?
+A Virtual Warehouse is:
+A cluster of compute resources (CPU, memory, temporary storage)
+Used to run SQL queries, DML operations, loads, and transformations
+Independent from other warehouses
+Can be started, stopped, resized anytime
+Think of it as a compute engine that processes your queries but does NOT store data permanently.
+    
+🔹 How Do Virtual Warehouses Scale?
+There are two types of scaling:
+
+1️⃣ Vertical Scaling (Resize Warehouse)
+This means changing warehouse size.
+Example:
+ALTER WAREHOUSE my_wh SET WAREHOUSE_SIZE = 'LARGE';
+
+📌 When to use?
+Query is slow
+Large joins or aggregations
+Heavy transformations
+    
+📌 What happens?
+More CPU & memory allocated
+Queries run faster
+Cost increases per second
