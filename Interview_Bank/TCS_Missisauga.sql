@@ -67,7 +67,8 @@ Does NOT affect storage
 Grouping employees by department for ranking.
 
 🚀 One-Line Interview Answer
-“CLUSTER BY improves storage performance by organizing micro-partitions, while PARTITION BY is used in window functions to logically group rows during query execution.”
+“CLUSTER BY improves storage performance by organizing micro-partitions, 
+while PARTITION BY is used in window functions to logically group rows during query execution.”
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 5. How to calculate to time required to execute the insert query in snowflake?
 CREATE OR REPLACE DATABASE company_db;;
@@ -171,7 +172,7 @@ Duration = 7 days (fixed)
 You CANNOT query it yourself
 Only Snowflake Support can restore it
 ---------------------------------------------------------------------------------------------
-🔹 What is a Clustering Key?
+11🔹 What is a Clustering Key?
 In Snowflake, a clustering key defines how table data should be physically organized across micro-partitions.
 Clustering improves:
 Query performance
@@ -179,3 +180,38 @@ Partition elimination
 Reduced data scanned
 Lower cost
 ----------------------------------------------------------------------------------------------------
+12 🎯 How to Optimize Slow Queries in Snowflake?
+🔎 Step 1: Analyze Query Profile (First Thing to Do)
+Look at:
+Bytes scanned
+Partitions scanned vs total
+Join type
+Spill to local storage?
+Execution time breakdown
+
+SELECT *
+FROM TABLE(INFORMATION_SCHEMA.QUERY_HISTORY())
+ORDER BY START_TIME DESC
+LIMIT 5;
+
+1️⃣ Improve Partition Pruning
+2️⃣ Add Clustering Key (For Large Tables)
+3️⃣ Avoid SELECT *
+4️⃣ Optimize Joins
+5️⃣ Scale Warehouse (If Compute Bound)
+6️⃣ Enable Multi-Cluster (Concurrency Issue)
+7️⃣ Reduce Data Shuffling
+8️⃣ Use Result Caching
+-----------------------------------------------------------------------------------------
+13. How do you troubleshoot credit/compute cost issues?
+🎯 How Do You Troubleshoot Credit / Compute Cost Issues in Snowflake?
+In Snowflake, compute cost mainly comes from:
+Virtual Warehouses
+Auto reclustering
+Materialized views maintenance
+Snowpipe
+Tasks
+
+SELECT *
+FROM SNOWFLAKE.ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY
+ORDER BY START_TIME DESC;
