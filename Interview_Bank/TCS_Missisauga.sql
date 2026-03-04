@@ -215,3 +215,48 @@ Tasks
 SELECT *
 FROM SNOWFLAKE.ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY
 ORDER BY START_TIME DESC;
+--------------------------------------------------------------------------------------------------
+14. 🔐 1️⃣ What is a Secure View?
+A Secure View is a special type of view that:
+Hides underlying table structure
+Prevents query plan exposure
+Protects sensitive logic
+Is used for secure data sharing
+    
+📌 Why it exists?
+Normally, Snowflake’s optimizer may expose:
+Underlying table names
+Execution plan details
+Query rewrite logic
+Secure View prevents this.
+----------------------------------------------------------------------------------------------
+15. 🔐 1️⃣ What is a Secure View?
+A Secure View is a special type of view that:
+Hides underlying table structure
+Prevents query plan exposure
+Protects sensitive logic
+Is used for secure data sharing
+
+📌 Why it exists?
+Normally, Snowflake’s optimizer may expose:
+Underlying table names
+Execution plan details
+Query rewrite logic
+Secure View prevents this.
+
+🔹 Key Use Cases
+Data sharing across accounts
+Protecting sensitive business logic
+Hiding PII logic
+External data consumers
+
+⚡ 2️⃣ What is a Materialized View?
+A Materialized View (MV):
+Stores precomputed results physically
+Improves query performance
+Automatically refreshes when base table changes
+    
+Unlike a normal view:
+It consumes storage
+It consumes compute for maintenance
+-----------------------------------------------------------------------------------------
