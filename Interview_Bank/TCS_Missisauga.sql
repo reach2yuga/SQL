@@ -137,3 +137,45 @@ SCALING_POLICY = AUTO;
 If many users submit queries at the same time
 Snowflake automatically adds clusters
 Reduces query queuing
+--------------------------------------------------------------------------
+7. What Are Micro-Partitions in Snowflake?
+In Snowflake, all table data is automatically stored in micro-partitions.
+📌 Definition:
+A micro-partition is:
+A contiguous unit of storage
+Typically 50–500 MB (compressed)
+Automatically created by Snowflake
+Immutable (cannot be updated directly)
+You cannot manually create or manage micro-partitions — Snowflake handles it internally.
+------------------------------------------------------------------------------------------------
+8. What is Data Pruning?
+Data pruning means:
+Snowflake scans only relevant micro-partitions instead of the full table.
+----------------------------------------------------------------------------------------------------
+9. What is Time Travel and Fail-Safe, and how are they used?
+In Snowflake, Time Travel allows you to:
+Access historical data (previous versions of tables, schemas, or databases) for a defined retention period.
+🔹 Time Travel Retention Period
+Depends on account type:
+Standard Edition → 1 day (default)
+Enterprise Edition → Up to 90 days
+Temporary/Transient tables → 0 or 1 day (no Fail-Safe)
+You can configure it:
+ALTER TABLE orders SET DATA_RETENTION_TIME_IN_DAYS = 7;
+------------------------------------------------------------------------------------------------------
+10. 🔹 What is Fail-Safe?
+Fail-Safe is a Snowflake-managed disaster recovery mechanism.
+After Time Travel expires:
+Data enters Fail-Safe
+Duration = 7 days (fixed)
+You CANNOT query it yourself
+Only Snowflake Support can restore it
+---------------------------------------------------------------------------------------------
+🔹 What is a Clustering Key?
+In Snowflake, a clustering key defines how table data should be physically organized across micro-partitions.
+Clustering improves:
+Query performance
+Partition elimination
+Reduced data scanned
+Lower cost
+----------------------------------------------------------------------------------------------------
