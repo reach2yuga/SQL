@@ -307,4 +307,39 @@ Example: xy12345.east-us-2.azure.snowflakecomputing.com
 <account_identifier>.<region_id>.<cloud_platform>.snowflakecomputing.com
 xy12345.east-us-2.azure.snowflakecomputing.com
 --------------------------------------------------
-18. 
+18. 🔹 1️⃣ Types of Roles in Snowflake
+| Role              | Purpose                                                                                                               |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **ACCOUNTADMIN**  | Full control over the account. Can manage users, roles, warehouses, databases, security policies. Most powerful role. |
+| **SYSADMIN**      | Manages databases, schemas, tables, and warehouses. Can create objects, grant privileges to roles.                    |
+| **SECURITYADMIN** | Manages users, roles, and grants. Responsible for security administration.                                            |
+| **USERADMIN**     | Manages users and their roles. Can create users and assign roles.                                                     |
+| **PUBLIC**        | Default role for all users. Minimal privileges.                                                                       |
+
+🔹 3️⃣ Most Powerful Role
+✅ ACCOUNTADMIN
+Why:
+Can do everything in the account, including:
+Create users & roles
+Assign privileges to other roles
+Manage warehouses, databases, and security policies
+Has all privileges of SYSADMIN, SECURITYADMIN, and USERADMIN implicitly.
+⚠️ Important: Use sparingly — security best practice is not to use ACCOUNTADMIN for daily tasks.
+
+----------------------------------------------------------------------------------------------------
+19 . nowflake has multiple features, each with its own data retention period,
+
+| Feature                       | Retention Period          | Notes                                  |
+| ----------------------------- | ------------------------- | -------------------------------------- |
+| Query History (INFO_SCHEMA)   | 7 days                    | Real-time                              |
+| Query History (ACCOUNT_USAGE) | 1 year                    | Lag 45 min                             |
+| Table Data / Time Travel      | 1–90 days                 | Configurable per edition               |
+| Streams                       | Same as table Time Travel | Tracks changes                         |
+| Fail-Safe                     | 7 days                    | Only for Snowflake support recovery    |
+| Tasks History                 | 14 days                   | Execution info                         |
+| Snowpipe History              | 14 days                   | File load metadata                     |
+| Stages                        | Until deleted             | Internal or external storage dependent |
+
+-----------------------------------------------------------------------------------------------------------------------
+20.
+
