@@ -260,3 +260,51 @@ Unlike a normal view:
 It consumes storage
 It consumes compute for maintenance
 -----------------------------------------------------------------------------------------
+16. 🎯 What is Schema Drift?
+Schema drift happens when:
+Source schema changes unexpectedly
+New column added
+Column removed
+Data type changed
+Column renamed
+
+✅ Strategy 1: Use VARIANT for Raw Ingestion (Best Practice)
+Instead of strict column mapping:
+CREATE TABLE raw_table (
+    data VARIANT
+);
+
+✅ Strategy 2: Use MATCH_BY_COLUMN_NAME
+If loading structured files:
+COPY INTO target_table
+FROM @stage
+FILE_FORMAT = (FORMAT_NAME = my_csv_format)
+MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
+This helps when:
+Column order changes
+New columns added at end
+Prevents positional mismatch errors.
+
+✅ Strategy 3: Enable Schema Evolution (For Parquet)
+Snowflake supports schema evolution for Parquet:
+
+COPY INTO target_table
+FROM @stage
+FILE_FORMAT = (TYPE = PARQUET)
+MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
+
+Then:
+ALTER TABLE target_table 
+SET ENABLE_SCHEMA_EVOLUTION = TRUE;
+
+Now:
+New columns automatically added
+No load failure
+
+-----------------------------------------------------------------------------------------------------------
+17. 🔹 1️⃣ Important Things Needed to Log in to Snowflake
+Example: xy12345.east-us-2.azure.snowflakecomputing.com
+<account_identifier>.<region_id>.<cloud_platform>.snowflakecomputing.com
+xy12345.east-us-2.azure.snowflakecomputing.com
+--------------------------------------------------
+18. 
