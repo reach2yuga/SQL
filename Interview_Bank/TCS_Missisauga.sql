@@ -68,4 +68,32 @@ Grouping employees by department for ranking.
 
 🚀 One-Line Interview Answer
 “CLUSTER BY improves storage performance by organizing micro-partitions, while PARTITION BY is used in window functions to logically group rows during query execution.”
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5. How to calculate to time required to execute the insert query in snowflake?
+CREATE OR REPLACE DATABASE company_db;;
+CREATE OR REPLACE SCHEMA company_db.hr_schema;;
+USE DATABASE company_db;;
+USE SCHEMA hr_schema;;
+
+
+CREATE OR REPLACE TABLE employee (
+    emp_id     INT,
+    emp_name   STRING,
+    department STRING,
+    salary     NUMBER(10,2)
+);
+
+INSERT INTO employee (emp_id, emp_name, department, salary) VALUES
+(1, 'John Smith', 'IT', 75000.00),
+(2, 'Priya Patel', 'Finance', 68000.00),
+(3, 'David Lee', 'HR', 62000.00),
+(4, 'Maria Garcia', 'IT', 82000.00),
+(5, 'Arjun Kumar', 'Marketing', 59000.00);
+
+SELECT 
+    QH.START_TIME,
+    QH.*
+FROM TABLE(INFORMATION_SCHEMA.QUERY_HISTORY()) QH
+ORDER BY QH.START_TIME DESC
+LIMIT 5;
+----------------------------------------------------------------------------------------------------------------------------
