@@ -1,0 +1,133 @@
+1. Concatenate 2 list
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+# Concatenate
+combined = list1 + list2
+print(combined)
+
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+
+list1.extend(list2)  # modifies list1 in-place
+print(list1)
+------------------------------------------------------------------
+2. 
+input = (1,2,3,4,5)
+ 
+output = (1,3,6,10,15) 
+output []
+total = 0
+
+for i in input:
+	total+ = i
+	
+output.append(total)
+
+-------------------------------------------------------------------
+3. factorial programe:
+
+def factorial(n):
+  if n ==0 or n==1
+    return 1
+ else:
+    return n* factorial(n-1)
+
+print(factorial(5)) //120
+----------------------------------------------------------------------------
+4.remove duplicates from a list in Python:
+my_list = [1, 2, 2, 3, 4, 4, 5]
+unique = []
+for item in my_list:
+    if item not in unique:
+        unique.append(item)
+
+print(unique)
+
+----------------------------------------------------------------------------
+5.  Find missing numbers in a sequence
+# Given list
+my_list = [1, 2, 4, 6, 7]
+
+# Find missing numbers between min and max
+full_range = set(range(min(my_list), max(my_list) + 1))
+missing = list(full_range - set(my_list))
+
+print(sorted(missing))
+
+---------------------------------------------------------------------------------------
+6.  Reverse string programe:
+input_string = "Yugandhara"
+reverse_string = input_string(::-1)
+print(reverse_string)
+
+input_string = "Yugandhara"
+
+s = "yugandhara"
+reversed_str = ''
+for char in s:
+    reversed_str = char + reversed_str
+print(reversed_str)  # Output: arahdnaguy
+-----------------------------------------------------------------------------------------------
+7. Write a Python program to find the largest element in a list.
+nums = [10, 5, 8, 20, 3]
+
+def largest_number(numbers):
+	largest = numbers[0]
+	for num in numbers:
+	  if num > largest:
+	   largest = num
+	return largest
+largest_no = largest_number(nums)
+print(largest_no)
+
+-----------------------------------------------------------------------
+8. Write a Python program to find the common elements between two lists.
+list_a = [1, 2, 3, 4, 5]
+list_b = [4, 5, 6, 7, 8]
+
+def common_elements(list_a,list_b):
+	common_element = []
+	for item in list_a:
+		if item in list_b:
+		 common_element.append(item)
+	retrun common_element
+
+found_common_elemet = common_elemements(list_a,list_b)
+print(found_common_elemet)
+--------------------------------------------
+9.Count Frequency of Elements in a List
+Question:
+Given a list of values, return a dictionary with the count of each element.
+data = [1,2,2,3,3,3,4]
+Output {1:1, 2:2, 3:3, 4:1}
+
+from collections import Counter
+
+data = [1,2,2,3,3,3,4]
+result = Counter(data)
+
+print(result)
+
+-----------------------------------------------------------------------
+10. Find Duplicate Values in a List
+
+data = [1,2,3,4,2,3,5]
+data = [1,2,3,4,2,3,5]
+
+duplicates = set()
+seen = set()
+
+for i in data:
+    if i in seen:
+        duplicates.add(i)
+    else:
+        seen.add(i)
+
+print(duplicates)
+
+-------------------------------------------------------------------------
+11. Find Missing Number
+			
+		 
+
+
