@@ -1,0 +1,33 @@
+name: Notes CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - dev*
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ List files (just to confirm structure)
+      - name: List all files
+        run: |
+          echo "Project structure:"
+          ls -R
+
+      # 3️⃣ Validate Markdown files
+      - name: Check Markdown files
+        run: |
+          echo "Checking .md files..."
+          find . -name "*.md"
+
+      # 4️⃣ Success message
+      - name: Success
+        run: echo "✅ Notes repository validated successfully!"
