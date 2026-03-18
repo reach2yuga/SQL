@@ -139,5 +139,25 @@ Scaling to a Medium warehouse, the same query runs in 5 minutes, costing ~$0.08 
 This improves dashboard refresh times while optimizing cost, showing the balance between performance and spending.
 
 ---------------------------------------------------------------------------------
+❓ -- Insert into A
+INSERT INTO A VALUES
+(0),
+(0),
+(1),
+(1),
+(NULL);
 
+-- Insert into B
+INSERT INTO B VALUES
+(1),
+(1),
+(1),
+(NULL);
+
+INNER JOIN => 2 × 3 = 6 rows
+LEFT JOIN => ✅ Total rows = 2 (0s) + 6 (1s) + 1 (NULL) = 9 rows
+RIGHT JOIN => ✅ Total rows = 6 + 1 = 7 rows
+FULL OUTER JOIN => ✅ Total rows = 6 + 2 + 1 + 1 = 10 rows
+
+------------------------------------------------------------------------------------------
 
