@@ -1,13 +1,22 @@
 ❓ Why do you want to work at Metro Supply Chain?
 ⭐ Answer:
-
-“I come with strong experience in data engineering 💻, particularly working with Snowflake, SQL, and cloud platforms like AWS ☁️. I’ve built scalable ETL pipelines, optimized data workflows ⚙️, and worked on performance tuning to support large-scale analytics 📊. I also have hands-on experience handling high-volume data and ensuring data quality ✅, which is critical for business decision-making.
-
-With this background, I’m very interested in applying my skills in a domain like supply chain 🚚, where data has a direct impact on operations such as inventory management 📦, demand forecasting 📈, and logistics optimization.
-
-That’s why I’m excited about the opportunity at Metro Supply Chain. The company’s large-scale operations and focus on end-to-end supply chain solutions 🔄 provide the perfect environment to work on complex, data-driven challenges. I’m particularly drawn to how data can be leveraged here to improve efficiency ⚡, visibility 👀, and overall business performance.
-
-I see this role as a great opportunity where I can contribute with my technical expertise 🧠 while also learning more about the supply chain domain and growing within a fast-evolving, innovation-driven organization 🚀.”
+“I come with strong experience in data engineering 💻,
+ particularly working with Snowflake, SQL, and cloud platforms like AWS ☁️. 
+ I’ve built scalable ETL pipelines, optimized data workflows ⚙️, 
+ and worked on performance tuning to support large-scale analytics 📊. 
+ I also have hands-on experience handling high-volume data and ensuring data quality ✅,
+  which is critical for business decision-making.
+With this background, I’m very interested in applying my skills in a domain like supply chain 🚚,
+ where data has a direct impact on operations such as inventory management 📦, 
+ demand forecasting 📈, and logistics optimization.
+That’s why I’m excited about the opportunity at Metro Supply Chain.
+ The company’s large-scale operations and focus on end-to-end supply chain solutions 🔄
+  provide the perfect environment to work on complex, data-driven challenges. 
+  I’m particularly drawn to how data can be leveraged here to improve efficiency ⚡,
+   visibility 👀, and overall business performance.
+I see this role as a great opportunity where I can contribute with my technical expertise 🧠
+ while also learning more about the supply chain domain and growing within a fast-evolving, 
+ innovation-driven organization 🚀.”
 
 --------------------------------------------------------------------------------------------------
 
@@ -160,4 +169,85 @@ RIGHT JOIN => ✅ Total rows = 6 + 1 = 7 rows
 FULL OUTER JOIN => ✅ Total rows = 6 + 2 + 1 + 1 = 10 rows
 
 ------------------------------------------------------------------------------------------
+
+❓ Source has 1M rows, but target in Snowflake doesn’t match – how do you find missing data?
+⭐ Answer:
+
+“When source and target counts don’t match, I follow a systematic approach to identify missing
+ or mismatched data:
+1️⃣ Validate row counts
+First, compare total row counts in source vs target.
+Check for obvious mismatches in filters or transformations.
+2️⃣ Identify missing rows using joins
+Use a LEFT JOIN from source to target to find rows present in source but missing in target:
+SELECT s.*
+FROM source_table s
+LEFT JOIN target_table t
+  ON s.id = t.id
+WHERE t.id IS NULL;
+Similarly, use a RIGHT JOIN to check if target has extra rows.
+3️⃣ Check for duplicates or data type mismatches
+Ensure the key column(s) are unique and consistent in both source and target.
+Look for issues like leading/trailing spaces, NULLs, or different data formats.
+4️⃣ Validate aggregations / checksums
+Compute row-level hash/checksum in source and target to compare data integrity:
+
+SELECT MD5(TO_HEX(HASH(*))) AS row_hash
+FROM source_table;
+
+Compare hashes to find missing or mismatched rows.
+5️⃣ Investigate transformations
+Check if any business logic or filtering in ETL/ELT is causing row loss.
+Verify intermediate tables or staging layers.
+
+6️⃣ Automate incremental validation
+Once the issue is found, create Snowflake Tasks or monitoring scripts to validate data 
+during ETL for future loads.
+
+Example:
+In a recent project with 1M+ sales records, I noticed 10K rows missing in the target. 
+Using a LEFT JOIN on transaction_id, I quickly identified missing records caused by a NULL 
+issue in the source ID column. Fixing the transformation logic resolved the mismatch, 
+and I implemented automated checks to prevent recurrence.”
+
+------------------------------------------------------------------------------------------
+
+❓ How will you design virtual warehouses in Snowflake?
+⭐ Answer:
+“When designing virtual warehouses in Snowflake, I follow best practices to balance performance, 
+concurrency, and cost:
+
+1️⃣ Right-size warehouses ⚙️
+Choose the warehouse size (X-Small → 6X-Large) based on query complexity, data volume, 
+and concurrency.
+Start small for testing, scale up for heavy workloads.
+
+2️⃣ Auto-scaling for concurrency 🔄
+Enable multi-cluster auto-scaling for high-concurrency workloads, like dashboards or BI reporting.
+Ensures multiple users/queries run in parallel without queues.
+
+3️⃣ Separate warehouses by workload 🏗️
+Use different warehouses for ETL, transformations, and BI dashboards.
+Avoid mixing heavy batch jobs with interactive queries to prevent bottlenecks.
+
+4️⃣ Suspend and resume warehouses ⏱️
+Configure auto-suspend to stop warehouses when idle, reducing compute costs.
+Resume automatically when queries arrive.
+
+5️⃣ Monitor and optimize usage 📊
+Track warehouse usage via WAREHOUSE_LOAD_HISTORY or Snowflake Resource Monitors.
+Adjust size or clusters based on peak load patterns.
+
+6️⃣ Use transient or temporary warehouses for ad-hoc queries 🧪
+Prevents long-running exploratory queries from affecting production workloads.
+
+Example:
+In a retail project, I designed three warehouses:
+ETL Warehouse (Medium) – handles bulk data transformations at night.
+Analytics Warehouse (X-Large, multi-cluster auto-scale) – serves 50+ concurrent BI users.
+Ad-hoc Testing Warehouse (Small) – used by data engineers for one-off queries.
+This setup ensured fast queries, zero contention, and optimized costs, 
+while scaling automatically during peak hours.”
+
+----------------------------------------------------------------------------
 
