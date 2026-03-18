@@ -114,3 +114,30 @@ Perform regular testing and validation of the pipeline to ensure data quality an
 Document troubleshooting steps and solutions for future reference 📄
 -----------------------------------------------------------------------------------------------
 
+❓ How does warehouse sizing impact performance and cost in Snowflake?
+⭐ Answer (Point-wise + Real-world Example)
+1. What is warehouse sizing? ⚙️
+In Snowflake, a virtual warehouse is the compute resource that runs queries.
+Warehouses come in sizes: X-Small → 6X-Large.
+Larger warehouses have more compute nodes → more parallelism → faster query performance.
+Smaller warehouses are cheaper but may slow down complex queries.
+
+2. Impact on Performance 📊
+Larger warehouses handle more concurrent queries and bigger datasets efficiently.
+Scaling up a warehouse can reduce query runtime, especially for joins, aggregations, or large data scans.
+Using multi-cluster warehouses can improve concurrency for multiple users.
+
+3. Impact on Cost 💰
+Snowflake charges based on compute time × warehouse size.
+Bigger warehouses cost more per hour but may finish queries faster, potentially lowering total cost if the job is short.
+Using too large a warehouse unnecessarily wastes money.
+
+4. Real-world Example 🚚
+Suppose a company tracks daily sales across 1M+ transactions.
+Using an X-Small warehouse, a daily aggregation query takes 30 minutes, costing ~$0.10 per run.
+Scaling to a Medium warehouse, the same query runs in 5 minutes, costing ~$0.08 (shorter runtime → slightly cheaper total cost).
+This improves dashboard refresh times while optimizing cost, showing the balance between performance and spending.
+
+---------------------------------------------------------------------------------
+
+
