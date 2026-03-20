@@ -1,3 +1,94 @@
+🔹 1. What are LEAD() and LAG()?
+LAG() → looks at the previous row
+LEAD() → looks at the next row
+They are used with window functions (OVER()).
+
+sales_data
+| id | sale_date  | amount |
+| -- | ---------- | ------ |
+| 1  | 2024-01-01 | 100    |
+| 2  | 2024-01-02 | 150    |
+| 3  | 2024-01-03 | 200    |
+| 4  | 2024-01-04 | 180    |
+
+| sale_date  | amount | prev_amount | next_amount |
+| ---------- | ------ | ----------- | ----------- |
+| 2024-01-01 | 100    | NULL        | 150         |
+| 2024-01-02 | 150    | 100         | 200         |
+| 2024-01-03 | 200    | 150         | 180         |
+| 2024-01-04 | 180    | 200         | NULL        |
+
+SELECT 
+    sale_date,
+    amount,
+    LAG(amount) OVER (ORDER BY sale_date) AS prev_amount,
+    LEAD(amount) OVER (ORDER BY sale_date) AS next_amount
+FROM sales_data;
+
+-----------------------------------------------------------------------------------------
+
+🔹 🧩 Problem Statement
+You are given a table users containing email addresses.
+👉 Write a SQL query to extract the username (string before @) from each email.
+
+| id | email                                         |
+| -- | --------------------------------------------- |
+| 1  | [yuga@gmail.com]       |
+| 2  | [john@yahoo.com]       |
+| 3  | [alice@outlook.com]    |
+| 4  | [mike@test.org]        |
+
+| id | email                                         | username |
+| -- | --------------------------------------------- | -------- |
+| 1  | [yuga@gmail.com](mailto:yuga@gmail.com)       | yuga     |
+| 2  | [john@yahoo.com](mailto:john@yahoo.com)       | john     |
+| 3  | [alice@outlook.com](mailto:alice@outlook.com) | alice    |
+| 4  | [mike@test.org](mailto:mike@test.org)         | mike     |
+
+SELECT 
+    id,
+    email,
+    SUBSTRING_INDEX(email, '@', 1) AS username
+FROM users;
+
+SELECT SPLIT_PART(email, '@', 1) AS username
+FROM users;
+
+🔹 What SPLIT_PART Does
+👉 SPLIT_PART(string, delimiter, position)
+string → the column (email)
+delimiter → '@'
+position → 1 (the part before the first '@')
+-------------------------------------------------------------------------------------------
+
+🔹 🧩 Problem Statement
+You have a table with mixed values:
+Numbers → keep as is
+Strings (like 'a') → return NULL
+
+| value |
+| ----- |
+| 1     |
+| 2     |
+| a     |
+| 3     |
+| b     |
+
+
+| value |
+| ----- |
+| 1     |
+| 2     |
+| NULL  |
+| 3     |
+| NULL  |
+
+SELECT 
+    TRY_CAST(value AS INT) AS value
+FROM source;
+---------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------
 ❓ Why do you want to work at Metro Supply Chain?
 ⭐ Answer:
 “I come with strong experience in data engineering 💻,
