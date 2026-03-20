@@ -160,4 +160,26 @@ RIGHT JOIN => ✅ Total rows = 6 + 1 = 7 rows
 FULL OUTER JOIN => ✅ Total rows = 6 + 2 + 1 + 1 = 10 rows
 
 ------------------------------------------------------------------------------------------
+🔹 1. What are LEAD() and LAG()?
+LAG() → looks at the previous row
+LEAD() → looks at the next row
+They are used with window functions (OVER()).
+  
+sales_data
+| id | sale_date  | amount |
+| -- | ---------- | ------ |
+| 1  | 2024-01-01 | 100    |
+| 2  | 2024-01-02 | 150    |
+| 3  | 2024-01-03 | 200    |
+| 4  | 2024-01-04 | 180    |
+
+🔹 3. Basic LAG() and LEAD() Example
+SELECT 
+    sale_date,
+    amount,
+    LAG(amount) OVER (ORDER BY sale_date) AS prev_amount,
+    LEAD(amount) OVER (ORDER BY sale_date) AS next_amount
+FROM sales_data;
+
+
 
