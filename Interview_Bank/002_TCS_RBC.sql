@@ -474,4 +474,147 @@ INTERSECT
 SELECT id FROM table2;
 -------------------------------------------------------------------------------------------
 
+🔹 21. Find Records in One Table Not in Another
+📤 Output
+id
+1
+💻 Query
+SELECT id FROM table1
+EXCEPT
+SELECT id FROM table2;
+
+------------------------------------------------------------------------------------------
+
+🔹 22. Find Customers with No Orders
+📥 Input
+
+customers
+id	name
+1	A
+2	B
+3	C
+
+orders
+id	cust_id
+1	1
+2	2
+
+🧩 Question
+
+Find customers who never placed orders
+
+📤 Output
+name
+C
+💻 Query
+SELECT c.name
+FROM customers c
+LEFT JOIN orders o ON c.id = o.cust_id
+WHERE o.id IS NULL;
+
+------------------------------------------------------------------------------------------
+
+🔹 21. Find Employees Hired in Last 30 Days
+📥 Input
+name	hire_date
+A	2024-01-01
+B	2024-02-01
+C	2024-02-10
+🧩 Question
+
+Find recent hires
+
+💻 Query
+SELECT *
+FROM employees
+WHERE hire_date >= DATEADD(DAY, -30, GETDATE());
+
+------------------------------------------------------------------------------------------
+
+🔹 23. Find Employees with Same Salary
+📥 Input
+name	salary
+A	5000
+B	6000
+C	5000
+🧩 Question
+
+Find employees having same salary
+
+📤 Output
+name	salary
+A	5000
+C	5000
+💻 Query
+SELECT *
+FROM employees
+WHERE salary IN (
+    SELECT salary
+    FROM employees
+    GROUP BY salary
+    HAVING COUNT(*) > 1
+);
+
+-------------------------------------------------------------------------------------------
+
+🔹 25. Find First Non-Null Value
+📥 Input
+id	value
+1	NULL
+2	NULL
+3	10
+🧩 Question
+
+Get first non-null value
+
+📤 Output
+value
+10
+
+---------------------------------------------------------------------------------------------
+
+🔹 26. Find Difference Between Consecutive Rows
+📥 Input
+id	value
+1	10
+2	20
+3	15
+🧩 Question
+
+Find difference between rows
+
+📤 Output
+id	diff
+1	NULL
+2	10
+3	-5
+💻 Query
+SELECT 
+    id,
+    value - LAG(value) OVER (ORDER BY id) AS diff
+FROM table1;
+
+------------------------------------------------------------------------------------------
+
+🔹 28. Running Balance (Banking)
+📥 Input
+id	amount
+1	100
+2	-50
+3	200
+🧩 Question
+
+Calculate running balance
+
+📤 Output
+id	balance
+1	100
+2	50
+3	250
+
+SELECT 
+    id,
+    SUM(amount) OVER (ORDER BY id) AS balance
+FROM transactions;
+-----------------------------------------------------------------------------------------
 
