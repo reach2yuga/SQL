@@ -400,4 +400,78 @@ SELECT id FROM table2;
 
 ------------------------------------------------------------------------------------------
 
+🔹 18. Swap Values
+📥 Input
+id	gender
+1	M
+2	F
+3	M
+🧩 Question
+
+Swap M ↔ F
+
+📤 Output
+id	gender
+1	F
+2	M
+3	F
+
+SELECT 
+    id,
+    CASE
+        WHEN gender = 'M' THEN 'F'
+        WHEN gender = 'F' THEN 'M'
+    END AS gender
+FROM table_name;
+
+------------------------------------------------------------------------------------------
+
+🔹 19. Find Max Salary per Dept
+📥 Input
+dept_id	salary
+1	5000
+1	7000
+2	4000
+🧩 Question
+
+Get max salary per department
+
+📤 Output
+dept_id	max_salary
+1	7000
+2	4000
+
+SELECT dept_id, MAX(salary) AS max_salary
+FROM employees
+GROUP BY dept_id;
+
+------------------------------------------------------------------------------------------
+🔹 20. Find Common Records Between Two Tables
+📥 Input
+table1
+id
+1
+2
+3
+table2
+id
+2
+3
+4
+🧩 Question
+
+Find common ids
+
+📤 Output
+id
+2
+3
+
+💻 Query
+
+SELECT id FROM table1
+INTERSECT
+SELECT id FROM table2;
+-------------------------------------------------------------------------------------------
+
 
