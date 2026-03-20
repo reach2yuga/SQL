@@ -87,7 +87,63 @@ SELECT
     TRY_CAST(value AS INT) AS value
 FROM source;
 ---------------------------------------------------------------------------------------
+When should a warehouse in Snowflake be scaled vertically versus horizontally?
 
+In Snowflake, scaling is very flexible—you can scale compute warehouses in two main ways:
+
+🔼 Vertical scaling (resize warehouse)
+➕ Horizontal scaling (multi-cluster)
+
+🔹 1. Vertical Scaling (Resize Warehouse)
+👉 What it means in Snowflake
+
+Change warehouse size:
+X-SMALL → SMALL → MEDIUM → LARGE → X-LARGE ...
+👉 This increases:
+CPU
+Memory
+Cache
+
+🔹 2. Horizontal Scaling (Multi-Cluster Warehouse)
+👉 What it means in Snowflake
+
+Enable multiple clusters:
+
+ALTER WAREHOUSE my_wh 
+SET MIN_CLUSTER_COUNT = 1 
+    MAX_CLUSTER_COUNT = 5 
+    SCALING_POLICY = AUTO;
+
+👉 Snowflake automatically:
+Adds clusters when load increases
+Removes clusters when load decreases
+
+| Problem                       | Solution             |
+| ----------------------------- | -------------------- |
+| Slow query                    | 🔼 Vertical scaling  |
+| Query spilling (memory issue) | 🔼 Vertical scaling  |
+| Too many users                | ➕ Horizontal scaling |
+| Queries queued                | ➕ Horizontal scaling |
+| Dashboard load spike          | ➕ Horizontal scaling |
+| Heavy ETL job                 | 🔼 Vertical scaling  |
+
+-----------------------------------------------------------------------------------------
+How can you retrieve data from 5 minutes ago using Time Travel in Snowflake?
+
+🔹 ✅ Solution Using AT (OFFSET => …)
+SELECT *
+FROM my_table
+AT (OFFSET => -60 * 5);
+
+🔹 ✅ Alternative (Using TIMESTAMP)
+SELECT *
+FROM my_table
+AT (TIMESTAMP => DATEADD(MINUTE, -5, CURRENT_TIMESTAMP));
+
+🔹 ✅ Syntax Using Query ID
+SELECT *
+FROM my_table
+BEFORE (STATEMENT => 'your_query_id');
 -----------------------------------------------------------------------------------------
 ❓ Why do you want to work at Metro Supply Chain?
 ⭐ Answer:
